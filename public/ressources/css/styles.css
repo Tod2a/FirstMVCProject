@@ -1,0 +1,95 @@
+
+h2 {
+    text-align: center;
+    background-color: #c0e3e3; 
+    padding: 10px;
+}
+  
+
+form {
+    width: 50%;
+    margin: 0 auto; 
+    padding: 20px;
+}
+  
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+  
+  
+input[type="submit"] {
+    background-color: #c0e3e3; 
+    color: #333; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+  
+
+nav {
+    background-color: #8b4513; 
+    padding: 0.3em  1em;
+}
+  
+ 
+ul {
+    list-style: none;
+    display: flex;
+}
+
+
+li {
+    margin: 0 1em; 
+}
+
+li a {
+    display: inline-block;
+    padding: 1em 2em;
+    text-decoration: none;
+    color: white; 
+    background-color: #654321; 
+    border-radius: 5px;
+}
+  
+li a:hover {
+    background-color: #996633; 
+}
+
+.active {
+    color: red;
+}
+
+.internal_link {
+    display: block;
+    text-align: center;
+    text-decoration: none; 
+    padding: 10px 20px; 
+    background-color: #0077b5; 
+    color: #fff; 
+    border-radius: 5px; 
+    margin: 0 auto; 
+    width: 100px; 
+    height: 30px; 
+}
+  
+.internal_link:hover {
+   background-color: #00558e; 
+   color: #fff; 
+}
+
+.profil {
+    width: 50%;
+    margin: 0 auto; 
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
