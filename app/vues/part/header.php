@@ -1,6 +1,6 @@
 <?php
 
-require_once 'functions/set_nav.php';
+require_once 'set_nav.php';
 
 $html = set_nav("Accueil", "/index.php") . set_nav("Contact", "/contact.php") . set_nav("Connexion", "/connection.php");
 
@@ -11,7 +11,7 @@ $html = set_nav("Accueil", "/index.php") . set_nav("Contact", "/contact.php") . 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="/assets/CSS/styles.css">
+    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>/public/ressources/css/styles.css">
     <title><?=$title?></title>
 </head>
 <body>

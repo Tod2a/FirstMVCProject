@@ -1,0 +1,13 @@
+CREATE DATABASE IF NOT EXISTS bdd_projet_web DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+
+USE bdd_projet_web
+
+CREATE TABLE t_utilisateur_uti (
+            uti_id INT AUTO_INCREMENT PRIMARY KEY,
+            uti_pseudo VARCHAR(255) NOT NULL UNIQUE,
+            uti_email VARCHAR(255) NOT NULL UNIQUE,
+            uti_motdepasse char(60) NOT NULL,
+            uti_role ENUM('utilisateur', 'administrateur') NOT NULL DEFAULT 'utilisateur',
+            uti_compte_active BOOLEAN NOT NULL DEFAULT 0,
+            uti_code_activation char(5)
+        );

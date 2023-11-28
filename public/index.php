@@ -1,6 +1,6 @@
 <?php
 // Importer le routeur d'URL.
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'noyau' . DIRECTORY_SEPARATOR . 'routeur.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'routeur.php';
 
 // Etat de l'environnement : 'dev' en mode développement ou 'prod' en mode production.
 // Ceci me permet d'utiliser des conditions pour réaliser certaines actions seulement si je suis dans un mode spécifique.
@@ -16,13 +16,6 @@ define('BASE_URL', '');
 $patterns = ['id' => '\d+'];
 $routes = [
     obtenir_route('GET', '/', 'controleur_accueil', 'index'),
-    obtenir_route('GET', '/admin-gestion-utilisateur', 'controleur_admin_gestion_utilisateur', 'index'),
-    obtenir_route('DELETE', '/admin-gestion-utilisateur', 'controleur_admin_gestion_utilisateur', 'detruire'),
-    obtenir_route('GET', '/admin-gestion-utilisateur/creer', 'controleur_admin_gestion_utilisateur', 'creer'),
-    obtenir_route('POST', '/admin-gestion-utilisateur/creer', 'controleur_admin_gestion_utilisateur', 'stocker'),
-    obtenir_route('GET', '/admin-gestion-utilisateur/{id}', 'controleur_admin_gestion_utilisateur', 'montrer'),
-    obtenir_route('GET', '/admin-gestion-utilisateur/{id}/editer', 'controleur_admin_gestion_utilisateur', 'editer'),
-    obtenir_route('PUT', '/admin-gestion-utilisateur/{id}/editer', 'controleur_admin_gestion_utilisateur', 'actualiser')
 ];
 
 demarrer_routeur($routes, $patterns);
