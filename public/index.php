@@ -16,6 +16,7 @@ define('BASE_URL', '');
 $patterns = ['id' => '\d+'];
 $routes = [
     obtenir_route('GET', '/', 'controleur_accueil', 'index'),
+    obtenir_route('GET', '/contact', 'controleur_contact', 'index')
 ];
 
 demarrer_routeur($routes, $patterns);
