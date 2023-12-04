@@ -141,7 +141,23 @@ function is_validateForm (array $fields, array $userEntries, string $dataBase = 
         $values = [];
     }
 
-    return [$errors, $values, $access];
+    $finalMessage = format_finalMessage(count($errors));
+
+    return [$errors, $values, $access, $finalMessage];
+}
+
+function send_mail (array $array)
+{
+    $expediteur = $array['email'];
+    $message = $array['message'];
+    $destinataire = "test@test.fr";
+    $sujet = "projet web - formulaire de contact";
+    $entete = "From: $expediteur\r\n" . 
+        "To: $destinataire\r\n" . 
+        "Suject: $sujet\r\n" . 
+        "Content-Type: text/html; charset=\"UTF-8\"\r\n" . 
+        "Content-Transfer-Encoding: quoted-printable\r\n";
+    mail($destinataire, $sujet, $message, $entete);
 }
 
 ?>
