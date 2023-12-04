@@ -19,7 +19,7 @@ function get_pageInfos()
 function index ()
 {
     show_vue(get_pageInfos(), 'index');
-};
+}
 
 function PostedForm ()
 {

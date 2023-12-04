@@ -2,7 +2,7 @@
 
 require_once 'set_nav.php';
 
-$html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Connexion", "/connection.php");
+$html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Connexion", "/connexion");
 
 ?>
 

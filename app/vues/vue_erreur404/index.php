@@ -1,1 +1,1 @@
-<h1>Ressource Introuvable!</h1>
+<h1>Page Introuvable!</h1>

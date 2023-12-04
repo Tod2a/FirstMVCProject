@@ -17,7 +17,9 @@ $patterns = ['id' => '\d+'];
 $routes = [
     obtenir_route('GET', '/', 'controleur_accueil', 'index'),
     obtenir_route('GET', '/contact', 'controleur_contact', 'index'),
-    obtenir_route('POST', '/contact', 'controleur_contact', 'PostedForm')
+    obtenir_route('POST', '/contact', 'controleur_contact', 'PostedForm'),
+    obtenir_route('GET', '/connexion', 'controleur_connexion', 'index'),
+    obtenir_route('GET', '/inscription', 'controleur_inscription', 'index')
 ];
 
 demarrer_routeur($routes, $patterns);
