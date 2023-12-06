@@ -29,6 +29,26 @@ function postedform ()
     $result['values'] = $values;
     $result['access'] = $access;
     $result['finalMessage'] = $finalMessage;
+    if(count($errors) == 0)
+    {
+        $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConfig()['connexion_pseudo']['tableField']);
+        if (empty($user))
+        {
+            $result['finalMessage'] = "Veuillez d'abord vous inscrire";
+        }
+        else 
+        {
+            if (check_password($user[get_fieldConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
+            {
+                $result['finalMessage'] = "";
+                echo 'connexion OK';
+            }
+            else 
+            {
+                $result['finalMessage'] = 'Mot de passe erroné';
+            }
+        }
+    }
     show_vue(get_pageInfos(), 'index', $result);
 }
 

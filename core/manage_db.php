@@ -1,11 +1,12 @@
 <?php
+const SERVEUR = 'localhost';
+const UTILISATEUR = 'root';
+const MDP = '';
+const BDD = "bdd_projet_web";
+const TABLE = "t_utilisateur_uti";
 
-function connect_db ()
+function connect_db (string $nomDuServeur = SERVEUR, string $nomBDD = BDD, string $nomUtilisateur = UTILISATEUR, string $motDePasse = MDP)
 {
-    $nomDuServeur = 'localhost';
-    $nomUtilisateur = 'root';
-    $motDePasse = '';
-    $nomBDD = "bdd_projet_web";
     try
     {
 
@@ -97,5 +98,47 @@ function insert_values (array $userValues, array $fieldsConfig, string $table)
     return "inscription réussie";
 
 }
+
+function send_validateMail (array $account)
+{
+    $destinataire = $account['uti_email'];
+    $sujet = 'Code de validation de votre compte';
+    $message = 'voici votre code de validation ' . $account['uti_code_activation'];
+    $entete = "From: supersite@site.fr\r\n" . 
+        "To: $destinataire\r\n" . 
+        "Suject: $sujet\r\n" . 
+        "Content-Type: text/html; charset=\"UTF-8\"\r\n" . 
+        "Content-Transfer-Encoding: quoted-printable\r\n";
+    mail($destinataire, $sujet, $message, $entete);
+}
+
+function get_userByPseudo (string $pseudo, string $tablepseudo, string $table = TABLE)
+{
+    $pdo = connect_db();
+    $request = "SELECT * FROM $table WHERE $tablepseudo='$pseudo'";
+    $stmt = $pdo->prepare($request);
+    $stmt->execute();
+    $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (!empty($user[0]))
+    {
+        return $user[0];
+    }
+}
+
+function get_userById (int $id, string $tableid, string $table = TABLE)
+{
+    $pdo = connect_db();
+    $request = "SELECT * FROM $table WHERE $tableid=$id";
+    $stmt = $pdo->prepare($request);
+    $stmt->execute();
+    $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $user[0];
+}
+
+function check_password (string $user, string $post)
+{
+    return password_verify($post, $user);
+}
+
 
 ?>

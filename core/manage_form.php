@@ -1,4 +1,8 @@
 <?php
+
+require_once 'manage_db.php';
+
+
 //fonction qui va vérifier si le champ existe et est remplit
 function is_empty (string $field, array $usersEntries): bool
 {
@@ -32,33 +36,19 @@ function is_confirmed (string $field, array $usersEntries, string $secondField):
 }
 
 //fonction qui va vérifier dans une base de donnée si le champ existe déjà, à utiliser dans le cas des champs unique.
-function is_unique (string $field, array $usersEntries, string $database, string $table, string $entry):bool
+function is_unique (string $field, array $usersEntries, string $table, string $entry):bool
 {
-    $nomDuServeur = 'localhost';
-    $nomUtilisateur = 'root';
-    $motDePasse = '';
-    $nomBDD = $database;
     $values;
 
-    try
-    {
-        $pdo = new PDO("mysql:host=$nomDuServeur;dbname=$nomBDD", $nomUtilisateur, $motDePasse);
+    $pdo = connect_db();
 
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //on va chercher toutes les données stockées dans le champs voulu
+    $stmt = $pdo->query("SELECT $entry FROM $table");
 
-        //on va chercher toutes les données stockées dans le champs voulu
-        $stmt = $pdo->query("SELECT $entry FROM $table");
+    //on les stocks dans une variable.
+    $values = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-        //on les stocks dans une variable.
-        $values = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    }
-
-    catch(PDOException $e)
-    {
-     echo 'Erreur : ' . $e->getMessage();
-    }
-
+ 
     //on vérifie si l'entrée de l'utilisateurs est déjà présente et si c'est le cas on return false.
     if(count($values) > 0)
     {
@@ -85,7 +75,7 @@ function format_finalMessage (int $errors)
     return $errors === 0 ? 'Formulaire bien envoyé!' : 'Formulaire invalide.';
 }
 
-function is_validateForm (array $fields, array $userEntries, string $table = "test", string $dataBase = "bdd_projet_web",)
+function is_validateForm (array $fields, array $userEntries, string $table = "test", string $dataBase = "bdd_projet_web")
 {
     $errors = [];
     $access = [];
@@ -128,7 +118,7 @@ function is_validateForm (array $fields, array $userEntries, string $table = "te
                 $errors[$fieldName] = 'il faut maximum ' . $entry['maxLength'] . " caractères.";
                 $access[$fieldName] = format_access($fieldName);
             }
-            elseif (isset($entry['unique']) && $entry['unique'] === true && !is_unique($fieldName, $userEntries, $dataBase, $table, $entry['tableField']))
+            elseif (isset($entry['unique']) && $entry['unique'] === true && !is_unique($fieldName, $userEntries, $table, $entry['tableField']))
             {
                 $errors[$fieldName] = 'ce champ existe déjà, entrez une valeur différente';
                 $access[$fieldName] = format_access($fieldName);

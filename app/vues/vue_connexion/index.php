@@ -13,6 +13,7 @@
 <div id="connexion_motDePasse-error" class="error"><?=$args['errors']['connexion_motDePasse'] ?? ''; ?></div><br>
 
 <input type="submit" value="Se connecter">
+<?= $args['finalMessage'] ?? ""?>
 <form>
 
 <div><a href='/inscription' class="internal_link">inscription</a></div>
