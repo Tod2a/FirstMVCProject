@@ -2,7 +2,7 @@
 
 function set_nav (string $pageName, string $segmentULR)
 {
-    if ($_SERVER["SCRIPT_NAME"] == $segmentULR)
+    if ($_SERVER["REDIRECT_URL"] == $segmentULR)
     {
         $answer = "<li><a href=\"$segmentULR\" class=\"active\">$pageName</a></li>";
     }
