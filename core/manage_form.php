@@ -38,6 +38,7 @@ function is_unique (string $field, array $usersEntries, string $database, string
     $nomUtilisateur = 'root';
     $motDePasse = '';
     $nomBDD = $database;
+    $values;
 
     try
     {
@@ -59,13 +60,16 @@ function is_unique (string $field, array $usersEntries, string $database, string
     }
 
     //on vérifie si l'entrée de l'utilisateurs est déjà présente et si c'est le cas on return false.
-    foreach ($values as $values)
+    if(count($values) > 0)
     {
-        if ($values[$entry] === $usersEntries[$field])
+        foreach ($values as $value)
         {
-            return false;
+            if ($value[$entry] === $usersEntries[$field])
+            {
+                return false;
+            }
         }
-    }
+    }   
 
     return true;
 }
@@ -81,7 +85,7 @@ function format_finalMessage (int $errors)
     return $errors === 0 ? 'Formulaire bien envoyé!' : 'Formulaire invalide.';
 }
 
-function is_validateForm (array $fields, array $userEntries, string $dataBase = "test", string $table = "test")
+function is_validateForm (array $fields, array $userEntries, string $table = "test", string $dataBase = "bdd_projet_web",)
 {
     $errors = [];
     $access = [];

@@ -19,7 +19,9 @@ $routes = [
     obtenir_route('GET', '/contact', 'controleur_contact', 'index'),
     obtenir_route('POST', '/contact', 'controleur_contact', 'PostedForm'),
     obtenir_route('GET', '/connexion', 'controleur_connexion', 'index'),
-    obtenir_route('GET', '/inscription', 'controleur_inscription', 'index')
+    obtenir_route('GET', '/inscription', 'controleur_inscription', 'index'),
+    obtenir_route('POST', 'inscription', 'controleur_inscription', 'send_inscription'),
+    obtenir_route('POST', 'connexion', 'controleur_connexion', 'postedform')
 ];
 
 demarrer_routeur($routes, $patterns);

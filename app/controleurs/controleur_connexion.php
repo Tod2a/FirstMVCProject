@@ -4,6 +4,8 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
+require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_SEPARATOR . 'modele_connexion.php';
+
 function get_pageInfos()
 {
     return [
@@ -17,6 +19,17 @@ function get_pageInfos()
 function index ()
 {
     show_vue(get_pageInfos(), 'index');
+}
+
+function postedform ()
+{
+    $nomTable = "t_utilisateur_uti";
+    [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
+    $result['errors'] = $errors;
+    $result['values'] = $values;
+    $result['access'] = $access;
+    $result['finalMessage'] = $finalMessage;
+    show_vue(get_pageInfos(), 'index', $result);
 }
 
 ?>
