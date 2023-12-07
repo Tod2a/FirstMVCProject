@@ -6,26 +6,28 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
+
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_db.php';
 
-require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_SEPARATOR . 'modele_inscription.php';
+require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_SEPARATOR . 'modele_activation.php';
 
 function get_pageInfos()
 {
     return [
-        'vue' => 'vue_inscription',
-        'titre' => "Page d'inscription",
-        'description' => "Page d'inscription",
-        'baseUrl' => BASE_URL . '/' . 'inscription' . '/'
+        'vue' => 'vue_connexion',
+        'titre' => "Page de connexion",
+        'description' => "Page de connexion",
+        'baseUrl' => BASE_URL . '/' . 'connexion' . '/' . 'activation'
     ];
 }
 
 function index ()
 {
-    show_vue(get_pageInfos(), 'index');
+    show_vue(get_pageInfos(), 'activation');
 }
 
-function send_inscription ()
+function activation ()
 {
     $nomTable = "t_utilisateur_uti";
     [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
@@ -35,9 +37,14 @@ function send_inscription ()
     $result['finalMessage'] = $finalMessage;
     if(count($errors) === 0)
     {
-        $result['finalMessage'] = insert_values($_POST, get_fieldConfig(), $nomTable);
+        $result['finalMessage'] = set_validation($_POST['activation_code']);
+        header('Location: ' . BASE_URL . '/' . 'connexion');
+        exit();
     }
-    show_vue(get_pageInfos(), 'index', $result);
+    else
+    {
+        show_vue(get_pageInfos(), 'activation', $result);
+    }
 }
 
 ?>

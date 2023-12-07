@@ -99,14 +99,14 @@ function insert_values (array $userValues, array $fieldsConfig, string $table)
 
 }
 
-function send_validateMail (array $account)
+function send_validateMail (array $account, string $code)
 {
     $destinataire = $account['uti_email'];
     $sujet = 'Code de validation de votre compte';
-    $message = 'voici votre code de validation ' . $account['uti_code_activation'];
+    $message = 'voici votre code de validation ' . $code;
     $entete = "From: supersite@site.fr\r\n" . 
         "To: $destinataire\r\n" . 
-        "Suject: $sujet\r\n" . 
+        "Subject: $sujet\r\n" . 
         "Content-Type: text/html; charset=\"UTF-8\"\r\n" . 
         "Content-Transfer-Encoding: quoted-printable\r\n";
     mail($destinataire, $sujet, $message, $entete);
@@ -135,10 +135,44 @@ function get_userById (int $id, string $tableid, string $table = TABLE)
     return $user[0];
 }
 
-function check_password (string $user, string $post)
+function set_activationCode (string $id, string $table = TABLE)
 {
-    return password_verify($post, $user);
-}
+    $code = strval(rand(10000, 99999));
+    $user = get_userById($id, 'uti_id');
+  
+    $pdo = connect_db();
+    $requete = "UPDATE $table SET uti_code_activation = :code WHERE uti_id = :id";
+    $stmt = $pdo->prepare($requete);
 
+    $stmt->bindParam(':code', $code);
+    $stmt->bindParam(':id', $id);
+
+    if ($stmt->execute())
+    {
+        send_validateMail($user, $code);
+    }
+}
+//vérifie le code d'activation et active le compte si c'est correct
+function set_validation(string $code, string $table = TABLE)
+{
+    $tablefield ='uti_id';
+    $activeField ='uti_compte_active';
+    $id = $_SESSION['id'];
+    $user = get_userById($id, $tablefield);
+    print_r($user);
+    if($code === $user['uti_code_activation'])
+    {
+        $pdo = connect_db();           
+        $requete = "UPDATE $table SET $activeField = 1 WHERE $tablefield = $id";
+        $stmt = $pdo->prepare($requete);
+        $stmt->execute();
+        $_SESSION['actived'] = 1;
+        return 'Compte activé';
+    }
+    else
+    {
+        return "erreur d'activation";
+    }
+}
 
 ?>

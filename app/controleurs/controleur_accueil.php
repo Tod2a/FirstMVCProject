@@ -1,5 +1,7 @@
 <?php
 
+session_start();
+
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
 
 function get_pageInfos(){

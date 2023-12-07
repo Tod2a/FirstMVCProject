@@ -21,7 +21,11 @@ $routes = [
     obtenir_route('GET', '/connexion', 'controleur_connexion', 'index'),
     obtenir_route('GET', '/inscription', 'controleur_inscription', 'index'),
     obtenir_route('POST', 'inscription', 'controleur_inscription', 'send_inscription'),
-    obtenir_route('POST', 'connexion', 'controleur_connexion', 'postedform')
+    obtenir_route('POST', 'connexion', 'controleur_connexion', 'try_connection'),
+    obtenir_route('GET', 'connexion/activation', 'controleur_activation', 'index'),
+    obtenir_route('POST', 'connexion/activation', 'controleur_activation', 'activation'),
+    obtenir_route('GET', 'connexion/profil', 'controleur_profil', 'index'),
+    obtenir_route('POST', 'connexion/profil', 'controleur_profil', 'disconect')
 ];
 
 demarrer_routeur($routes, $patterns);
