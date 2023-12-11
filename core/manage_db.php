@@ -3,7 +3,6 @@ const SERVEUR = 'localhost';
 const UTILISATEUR = 'root';
 const MDP = '';
 const BDD = "bdd_projet_web";
-const TABLE = "t_utilisateur_uti";
 
 function connect_db (string $nomDuServeur = SERVEUR, string $nomBDD = BDD, string $nomUtilisateur = UTILISATEUR, string $motDePasse = MDP)
 {

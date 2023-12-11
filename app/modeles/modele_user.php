@@ -1,5 +1,7 @@
 <?php
 
+const TABLE = "t_utilisateur_uti";
+
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_db.php';
 
 function get_fieldConnexionConfig()
