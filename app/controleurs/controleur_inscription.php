@@ -13,16 +13,16 @@ require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_S
 function get_pageInfos()
 {
     return [
-        'vue' => 'vue_inscription',
+        'vue' => 'vue_connexion',
         'titre' => "Page d'inscription",
         'description' => "Page d'inscription",
-        'baseUrl' => BASE_URL . '/' . 'inscription' . '/'
+        'baseUrl' => BASE_URL . '/' . 'connexion' . '/' . 'inscription'
     ];
 }
 
 function index ()
 {
-    show_vue(get_pageInfos(), 'index');
+    show_vue(get_pageInfos(), 'inscription');
 }
 
 function send_inscription ()
@@ -43,7 +43,7 @@ function send_inscription ()
     {
         $result['finalMessage'] = insert_values($_POST, get_fieldConfig(), $nomTable);
     }
-    show_vue(get_pageInfos(), 'index', $result);
+    show_vue(get_pageInfos(), 'inscription', $result);
     }
 }
 

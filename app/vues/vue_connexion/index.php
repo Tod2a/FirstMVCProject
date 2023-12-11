@@ -16,4 +16,4 @@
 <?= $args['finalMessage'] ?? ""?>
 <form>
 
-<div><a href='/inscription' class="internal_link">inscription</a></div>
+<div><a href='connexion/inscription' class="internal_link">inscription</a></div>
