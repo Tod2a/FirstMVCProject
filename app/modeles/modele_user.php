@@ -179,20 +179,10 @@ function get_userByPseudo (string $pseudo, string $tablepseudo, string $table = 
     }
 }
 
-function get_userById (int $id, string $tableid, string $table = TABLE)
-{
-    $pdo = connect_db();
-    $request = "SELECT * FROM $table WHERE $tableid=$id";
-    $stmt = $pdo->prepare($request);
-    $stmt->execute();
-    $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $user[0];
-}
-
 function set_activationCode (string $id, string $table = TABLE)
 {
     $code = strval(rand(10000, 99999));
-    $user = get_userById($id, 'uti_id');
+    $user = get_byId($id, 'uti_id', TABLE);
   
     $pdo = connect_db();
     $requete = "UPDATE $table SET uti_code_activation = :code WHERE uti_id = :id";
@@ -212,7 +202,7 @@ function set_validation(string $code, string $table = TABLE)
     $tablefield ='uti_id';
     $activeField ='uti_compte_active';
     $id = $_SESSION['id'];
-    $user = get_userById($id, $tablefield);
+    $user = get_byId($id, $tablefield, TABLE);
     print_r($user);
     if($code === $user['uti_code_activation'])
     {
@@ -228,5 +218,7 @@ function set_validation(string $code, string $table = TABLE)
         return "erreur d'activation";
     }
 }
+
+
 
 ?>

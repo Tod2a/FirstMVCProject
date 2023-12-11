@@ -1,8 +1,7 @@
 <h2>Votre profil</h2>
-
 <p class="profil">
-Votre pseudo: <?=$_SESSION['pseudo'] ?? '' ?><br>
-Votre email: <?=$_SESSION['email'] ?? '' ?><br>
+Votre pseudo: <?=$args['uti_pseudo'] ?? '' ?><br>
+Votre email: <?=$args['uti_email'] ?? '' ?><br>
 </p>
 <form method="post">
     <input type="hidden" name="csrf_token" value="<?=set_CSRFToken()?>">

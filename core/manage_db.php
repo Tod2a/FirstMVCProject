@@ -20,6 +20,14 @@ function connect_db (string $nomDuServeur = SERVEUR, string $nomBDD = BDD, strin
     return $pdo;
 }
 
-
+function get_byId (int $id, string $tableid, string $table)
+{
+    $pdo = connect_db();
+    $request = "SELECT * FROM $table WHERE $tableid=$id";
+    $stmt = $pdo->prepare($request);
+    $stmt->execute();
+    $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $user[0];
+}
 
 ?>

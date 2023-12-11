@@ -6,6 +6,10 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
 
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_db.php';
+
+require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_SEPARATOR . 'modele_user.php';
+
 function get_pageInfos()
 {
     return [
@@ -20,7 +24,8 @@ function index()
 {
     if (is_connected() )
     {
-        show_vue(get_pageInfos(), 'profil');
+        $user = get_byId($_SESSION['id'], 'uti_id', TABLE);
+        show_vue(get_pageInfos(), 'profil', $user);
     }
     else
     {
