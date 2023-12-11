@@ -34,7 +34,7 @@ function disconect()
 {
     if (!is_validCSRF())
     {
-        header('Location: ' . BASE_URL . '/' . 'error' ); 
+        show_error404();
     }
     else
     {

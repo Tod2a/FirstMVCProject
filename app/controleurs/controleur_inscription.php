@@ -27,7 +27,7 @@ function send_inscription ()
 {
     if (!is_validCSRF() || !is_validRequestFrequency())
     {
-        header('Location: ' . BASE_URL . '/' . 'error' ); 
+        show_error404();
     }
     else
     {

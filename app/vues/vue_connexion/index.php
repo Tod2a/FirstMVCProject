@@ -1,7 +1,6 @@
 <h2>Connexion</h2>
 
 <form method="post">
-<input type="hidden" value="connection" id="formNom" name="formNom">
 <input type="hidden" name="csrf_token" value="<?=set_CSRFToken()?>">
 
 <label for="connexion_pseudo">Pseudo:</label><br>
