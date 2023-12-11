@@ -20,7 +20,7 @@ function get_pageInfos()
 
 function index()
 {
-    if (isset($_SESSION['id']) && $_SESSION['actived'] == 1)
+    if (is_connected() )
     {
         show_vue(get_pageInfos(), 'profil');
     }

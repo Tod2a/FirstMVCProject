@@ -8,7 +8,7 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
 
-require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_SEPARATOR . 'modele_connexion.php';
+require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_SEPARATOR . 'modele_user.php';
 
 function get_pageInfos()
 {
@@ -22,20 +22,13 @@ function get_pageInfos()
 
 function index ()
 {
-    if (!isset($_SESSION['id']))
+    if (is_connected())
     {
-        show_vue(get_pageInfos(), 'index');
+        header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'profil');    
     }
     else
     {
-        if($_SESSION['actived'] == 0)
-        {
-            header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'activation');
-        }
-        else
-        {
-            header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'profil');
-        }
+        show_vue(get_pageInfos(), 'index');
     }
 }
 
@@ -48,30 +41,32 @@ function try_connection ()
     else
     {
         $nomTable = "t_utilisateur_uti";
-        [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
+        [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConnexionConfig(), $_POST, $nomTable);
         $result['errors'] = $errors;
         $result['values'] = $values;
         $result['access'] = $access;
         $result['finalMessage'] = $finalMessage;
         if(count($errors) == 0)
         {
-            $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConfig()['connexion_pseudo']['tableField']);
+            $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConnexionConfig()['connexion_pseudo']['tableField']);
             if (empty($user))
             {
                 $result['finalMessage'] = "Veuillez d'abord vous inscrire";
             }
             else 
             {
-                if (check_password($user[get_fieldConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
+                if (check_password($user[get_fieldConnexionConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
                 {
                     $result['finalMessage'] = "";
                     start_connection ($user);
                     if ($user['uti_compte_active'] == 1)
                     {
+                        $_SESSION['activated'] = true;
                         header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'profil');
                     }
                     else
                     {
+                        $_SESSION['activated'] = false;
                         set_activationCode($_SESSION['id']);
                         header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'activation');
                         exit();

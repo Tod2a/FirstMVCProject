@@ -166,7 +166,7 @@ function set_validation(string $code, string $table = TABLE)
         $requete = "UPDATE $table SET $activeField = 1 WHERE $tablefield = $id";
         $stmt = $pdo->prepare($requete);
         $stmt->execute();
-        $_SESSION['actived'] = 1;
+        $_SESSION['activated'] = true;
         return 'Compte activé';
     }
     else
