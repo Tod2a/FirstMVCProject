@@ -1,5 +1,8 @@
 <?php
 // Importer le routeur d'URL.
+
+session_start();
+
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'routeur.php';
 
 // Etat de l'environnement : 'dev' en mode développement ou 'prod' en mode production.

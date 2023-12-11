@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
@@ -41,12 +39,8 @@ function try_connection ()
     else
     {
         $nomTable = "t_utilisateur_uti";
-        [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConnexionConfig(), $_POST, $nomTable);
-        $result['errors'] = $errors;
-        $result['values'] = $values;
-        $result['access'] = $access;
-        $result['finalMessage'] = $finalMessage;
-        if(count($errors) == 0)
+        $result = is_validateform(get_fieldConnexionConfig(), $_POST, $nomTable);
+        if(count($result['errors']) == 0)
         {
             $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConnexionConfig()['connexion_pseudo']['tableField']);
             if (empty($user))

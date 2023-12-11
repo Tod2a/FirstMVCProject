@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 // Importer le gestionnaire de vues.
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
 

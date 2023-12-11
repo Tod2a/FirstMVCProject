@@ -137,7 +137,7 @@ function is_validateForm (array $fields, array $userEntries, string $table = "te
 
     $finalMessage = format_finalMessage(count($errors));
 
-    return [$errors, $values, $access, $finalMessage];
+    return ['errors'=>$errors, 'values'=>$values, 'access'=>$access, 'finalMessage'=>$finalMessage];
 }
 
 function send_mail (array $array)

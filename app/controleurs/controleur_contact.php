@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
@@ -31,12 +29,8 @@ function PostedForm ()
     }
     else
     {
-    [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST);
-    $result['errors'] = $errors;
-    $result['values'] = $values;
-    $result['access'] = $access;
-    $result['finalMessage'] = $finalMessage;
-    if (count($errors) === 0)
+    $result = is_validateform(get_fieldConfig(), $_POST);
+    if (count($result['errors']) === 0)
     {
         send_mail($_POST);
     }

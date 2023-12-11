@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
@@ -41,12 +39,8 @@ function activation ()
     else
     {
         $nomTable = "t_utilisateur_uti";
-        [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldActivationConfig(), $_POST, $nomTable);
-        $result['errors'] = $errors;
-        $result['values'] = $values;
-        $result['access'] = $access;
-        $result['finalMessage'] = $finalMessage;
-        if(count($errors) === 0)
+        $result = is_validateform(get_fieldActivationConfig(), $_POST, $nomTable);
+        if(count($result['errors']) === 0)
         {
             $result['finalMessage'] = set_validation($_POST['activation_code']);
             header('Location: ' . BASE_URL . '/' . 'connexion');
