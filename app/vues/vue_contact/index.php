@@ -1,7 +1,7 @@
 <h2>Contact</h2>
 
 <form method="post">
-<!--<input type="hidden" name="csrf_token" value="//generer_jetonCSRF()?>">-->
+<input type="hidden" name="csrf_token" value="<?=set_CSRFToken()?>">
 
 <label for="fname">First Name:</label><br>
 <input type="text" id="fname" name="fname" value="<?=htmlentities($args['values']['fname'] ?? "")?>" <?=$args['access']['fname'] ?? ""?> required><br>

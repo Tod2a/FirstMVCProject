@@ -2,7 +2,7 @@
 
 <form method="post">
 <input type="hidden" value="connection" id="formNom" name="formNom">
-<!--<input type="hidden" name="csrf_token" value="generer_jetonCSRF()?>">-->
+<input type="hidden" name="csrf_token" value="<?=set_CSRFToken()?>">
 
 <label for="connexion_pseudo">Pseudo:</label><br>
 <input type="text" id="connexion_pseudo" value="<?=htmlentities($args['values']['connexion_pseudo'] ?? "") ?>" <?=$args['access']['connextion_pseudo'] ?? ""?> name="connexion_pseudo"  required><br>

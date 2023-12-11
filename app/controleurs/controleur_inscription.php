@@ -27,6 +27,12 @@ function index ()
 
 function send_inscription ()
 {
+    if (!is_validCSRF() || !is_validRequestFrequency())
+    {
+        header('Location: ' . BASE_URL . '/' . 'error' ); 
+    }
+    else
+    {
     $nomTable = "t_utilisateur_uti";
     [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
     $result['errors'] = $errors;
@@ -38,6 +44,7 @@ function send_inscription ()
         $result['finalMessage'] = insert_values($_POST, get_fieldConfig(), $nomTable);
     }
     show_vue(get_pageInfos(), 'index', $result);
+    }
 }
 
 ?>

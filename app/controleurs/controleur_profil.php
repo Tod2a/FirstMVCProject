@@ -4,6 +4,8 @@ session_start();
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
 
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
+
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
 
 function get_pageInfos()
@@ -18,12 +20,26 @@ function get_pageInfos()
 
 function index()
 {
-    show_vue(get_pageInfos(), 'profil');
+    if (isset($_SESSION['id']) && $_SESSION['actived'] == 1)
+    {
+        show_vue(get_pageInfos(), 'profil');
+    }
+    else
+    {
+        header('Location: ' . BASE_URL . '/' . 'connexion' );      
+    }
 }
 
 function disconect()
 {
+    if (!is_validCSRF())
+    {
+        header('Location: ' . BASE_URL . '/' . 'error' ); 
+    }
+    else
+    {
     disconect_user();
     header('Location: ' . BASE_URL . '/' . 'connexion');
+    }
 }
 ?>

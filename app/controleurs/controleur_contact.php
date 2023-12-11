@@ -25,6 +25,12 @@ function index ()
 
 function PostedForm ()
 {
+    if (!is_validCSRF()  || !is_validRequestFrequency())
+    {
+        header('Location: ' . BASE_URL . '/' . 'error' ); 
+    }
+    else
+    {
     [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST);
     $result['errors'] = $errors;
     $result['values'] = $values;
@@ -35,6 +41,7 @@ function PostedForm ()
         send_mail($_POST);
     }
     show_vue(get_pageInfos(), 'index', $result);
+    }
 }
 
 

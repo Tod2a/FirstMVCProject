@@ -41,42 +41,47 @@ function index ()
 
 function try_connection ()
 {
-    $nomTable = "t_utilisateur_uti";
-    [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
-    $result['errors'] = $errors;
-    $result['values'] = $values;
-    $result['access'] = $access;
-    $result['finalMessage'] = $finalMessage;
-    if(count($errors) == 0)
+    if (!is_validCSRF()  || !is_validRequestFrequency())
     {
-        $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConfig()['connexion_pseudo']['tableField']);
-        if (empty($user))
+        header('Location: ' . BASE_URL . '/' . 'error' ); 
+    }
+    else
+    {
+        $nomTable = "t_utilisateur_uti";
+        [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
+        $result['errors'] = $errors;
+        $result['values'] = $values;
+        $result['access'] = $access;
+        $result['finalMessage'] = $finalMessage;
+        if(count($errors) == 0)
         {
-            $result['finalMessage'] = "Veuillez d'abord vous inscrire";
-        }
-        else 
-        {
-            if (check_password($user[get_fieldConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
+            $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConfig()['connexion_pseudo']['tableField']);
+            if (empty($user))
             {
-                $result['finalMessage'] = "";
-                start_connection ($user);
-                if ($user['uti_compte_active'] == 1)
-                {
-                    $_SESSION['pseudo'] = $user['uti_pseudo'];
-                    $_SESSION['email'] = $user['uti_email'];
-                    header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'profil');
-                }
-                else
-                {
-                    set_activationCode($_SESSION['id']);
-                    header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'activation');
-                    exit();
-                }
+                $result['finalMessage'] = "Veuillez d'abord vous inscrire";
             }
             else 
             {
-                $result['finalMessage'] = 'Mot de passe erroné';
-                show_vue(get_pageInfos(), 'index', $result);
+                if (check_password($user[get_fieldConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
+                {
+                    $result['finalMessage'] = "";
+                    start_connection ($user);
+                    if ($user['uti_compte_active'] == 1)
+                    {
+                        header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'profil');
+                    }
+                    else
+                    {
+                        set_activationCode($_SESSION['id']);
+                        header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'activation');
+                        exit();
+                    }
+                }
+                else 
+                {
+                    $result['finalMessage'] = 'Mot de passe erroné';
+                    show_vue(get_pageInfos(), 'index', $result);
+                }
             }
         }
     }

@@ -24,26 +24,40 @@ function get_pageInfos()
 
 function index ()
 {
-    show_vue(get_pageInfos(), 'activation');
+    if (isset($_SESSION['id']) && $_SESSION['actived'] == 0)
+    {
+        show_vue(get_pageInfos(), 'activation');
+    }
+    else
+    {
+        header('Location: ' . BASE_URL . '/' . 'connexion' );      
+    }
 }
 
 function activation ()
 {
-    $nomTable = "t_utilisateur_uti";
-    [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
-    $result['errors'] = $errors;
-    $result['values'] = $values;
-    $result['access'] = $access;
-    $result['finalMessage'] = $finalMessage;
-    if(count($errors) === 0)
+    if (!is_validCSRF()  || !is_validRequestFrequency())
     {
-        $result['finalMessage'] = set_validation($_POST['activation_code']);
-        header('Location: ' . BASE_URL . '/' . 'connexion');
-        exit();
+        header('Location: ' . BASE_URL . '/' . 'error' ); 
     }
     else
     {
-        show_vue(get_pageInfos(), 'activation', $result);
+        $nomTable = "t_utilisateur_uti";
+        [$errors, $values, $access, $finalMessage] = is_validateform(get_fieldConfig(), $_POST, $nomTable);
+        $result['errors'] = $errors;
+        $result['values'] = $values;
+        $result['access'] = $access;
+        $result['finalMessage'] = $finalMessage;
+        if(count($errors) === 0)
+        {
+            $result['finalMessage'] = set_validation($_POST['activation_code']);
+            header('Location: ' . BASE_URL . '/' . 'connexion');
+            exit();
+        }
+        else
+        {
+            show_vue(get_pageInfos(), 'activation', $result);
+        }
     }
 }
 

@@ -154,4 +154,46 @@ function send_mail (array $array)
     mail($destinataire, $sujet, $message, $entete);
 }
 
+function set_CSRFToken(): string
+{
+    // random_bytes(32) génère 32 octets (256 bits) de données aléatoires.
+    // bin2hex() convertit les données binaires en chaîne de 64 caractères hexadécimaux.
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    return $_SESSION['csrf_token'];
+}
+
+function is_validCSRF(): bool
+{
+    return (
+        isset($_POST['csrf_token']) &&
+        $_POST['csrf_token'] === $_SESSION['csrf_token']
+    );
+}
+
+function is_validRequestFrequency($maxRequests = 5, $timeWindow = 10)
+{
+    $currentTime = time();
+
+    if (isset($_SESSION['last_submit_time'])) {
+        $lastSubmitTime = $_SESSION['last_submit_time'];
+
+        $timeDifference = $currentTime - $lastSubmitTime;
+
+        if ($timeDifference <= $timeWindow && $_SESSION['num_requests'] < $maxRequests) {
+            $_SESSION['num_requests']++; 
+            return true; 
+        } elseif ($timeDifference > $timeWindow) {
+            $_SESSION['num_requests'] = 1;
+            $_SESSION['last_submit_time'] = $currentTime;
+            return true; 
+        } else {
+            return false; 
+        }
+    } else {
+        $_SESSION['num_requests'] = 1;
+        $_SESSION['last_submit_time'] = $currentTime;
+        return true; 
+    }
+}
+
 ?>
