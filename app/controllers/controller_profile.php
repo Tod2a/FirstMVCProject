@@ -22,10 +22,10 @@ function get_pageInfos()
 
 function index()
 {
-    if (is_connected() )
+    if (ManageConnection::is_connected() )
     {
-        $user = get_byId($_SESSION['id'], 'uti_id', TABLE);
-        show_view(get_pageInfos(), 'profile', $user);
+        $user = ManageDb::get_byId($_SESSION['id'], 'uti_id', TABLE);
+        DisplayView::show_view(get_pageInfos(), 'profile', $user);
     }
     else
     {
@@ -35,13 +35,14 @@ function index()
 
 function disconect()
 {
-    if (!is_validCSRF())
+    if (!ManageForm::is_validCSRFAndFrequency())
     {
-        show_error404();
+        ManageConnection::disconect_user();
+        DisplayView::show_error404();
     }
     else
     {
-    disconect_user();
+    ManageConnection::disconect_user();
     header('Location: ' . BASE_URL . '/' . 'connexion');
     }
 }

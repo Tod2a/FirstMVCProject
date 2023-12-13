@@ -133,7 +133,7 @@ function set_insertrequest (array $tableFields, string $table)
 function insert_values (array $userValues, array $fieldsConfig, string $table)
 {
     
-    $pdo = connect_db();
+    $pdo = ManageDb::connect_db();
         
     [$request, $values] = set_insertrequest($fieldsConfig, $table);
     $user = get_tableValues ($userValues, $fieldsConfig);
@@ -168,7 +168,7 @@ function send_validateMail (array $account, string $code)
 
 function get_userByPseudo (string $pseudo, string $tablepseudo, string $table = TABLE)
 {
-    $pdo = connect_db();
+    $pdo = MAnageDb::connect_db();
     $request = "SELECT * FROM $table WHERE $tablepseudo='$pseudo'";
     $stmt = $pdo->prepare($request);
     $stmt->execute();
@@ -182,9 +182,9 @@ function get_userByPseudo (string $pseudo, string $tablepseudo, string $table = 
 function set_activationCode (string $id, string $table = TABLE)
 {
     $code = strval(rand(10000, 99999));
-    $user = get_byId($id, 'uti_id', TABLE);
+    $user = ManageDb::get_byId($id, 'uti_id', TABLE);
   
-    $pdo = connect_db();
+    $pdo = ManageDb::connect_db();
     $requete = "UPDATE $table SET uti_code_activation = :code WHERE uti_id = :id";
     $stmt = $pdo->prepare($requete);
 
@@ -202,11 +202,10 @@ function set_validation(string $code, string $table = TABLE)
     $tablefield ='uti_id';
     $activeField ='uti_compte_active';
     $id = $_SESSION['id'];
-    $user = get_byId($id, $tablefield, TABLE);
-    print_r($user);
+    $user = ManageDb::get_byId($id, $tablefield, TABLE);
     if($code === $user['uti_code_activation'])
     {
-        $pdo = connect_db();           
+        $pdo = ManageDb::connect_db();           
         $requete = "UPDATE $table SET $activeField = 1 WHERE $tablefield = $id";
         $stmt = $pdo->prepare($requete);
         $stmt->execute();

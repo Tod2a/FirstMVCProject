@@ -4,7 +4,7 @@ require_once 'set_nav.php';
 
 require_once dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
 
-if (is_connected())
+if (ManageConnection::is_connected())
 {
     $html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Profil", "/connexion/profil");
 }

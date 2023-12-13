@@ -1,7 +1,7 @@
 <h2>Inscription</h2>
 
 <form method="post">
-<input type="hidden" name="csrf_token" value="<?=set_CSRFToken()?>">
+<input type="hidden" name="csrf_token" value="<?=ManageForm::set_CSRFToken()?>">
 
 <label for="inscription_pseudo">Pseudo:</label><br>
 <input type="text" id="inscription_pseudo" name="inscription_pseudo" maxlength="255" minlength="2" value="<?=htmlentities($args['values']['inscription_pseudo'] ?? "")?>" <?=$args['access']['inscription_pseudo'] ?? ""?> required><br>

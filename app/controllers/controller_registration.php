@@ -18,23 +18,23 @@ function get_pageInfos()
 
 function index ()
 {
-    show_view(get_pageInfos(), 'registration');
+    DisplayView::show_view(get_pageInfos(), 'registration');
 }
 
 function send_registration ()
 {
-    if (!is_validCSRF() || !is_validRequestFrequency())
+    if (!ManageForm::is_validCSRFAndFrequency())
     {
-        show_error404();
+        DisplayView::show_error404();
     }
     else
     {
-    $result = is_validateform(get_fieldInscriptionConfig(), $_POST, TABLE);
+    $result = MAnageForm::is_validateform(get_fieldInscriptionConfig(), $_POST, TABLE);
     if(count($result['errors']) === 0)
     {
-        $result['finalMessage'] = insert_values($_POST, get_fieldInscriptionConfig(), $nomTable);
+        $result['finalMessage'] = insert_values($_POST, get_fieldInscriptionConfig(), TABLE);
     }
-    show_view(get_pageInfos(), 'registration', $result);
+    DisplayView::show_view(get_pageInfos(), 'registration', $result);
     }
 }
 

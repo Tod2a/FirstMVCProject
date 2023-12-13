@@ -20,39 +20,40 @@ function get_pageInfos()
 
 function index ()
 {
-    if (is_connected())
+    if (ManageConnection::is_connected())
     {
         header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'profil');    
     }
     else
     {
-        show_view(get_pageInfos(), 'index');
+        DisplayView::show_view(get_pageInfos(), 'index');
     }
 }
 
 function try_connection ()
 {
-    if (!is_validCSRF()  || !is_validRequestFrequency())
+    if (!ManageForm::is_validCSRFAndFrequency())
     {
-        show_error404();
+        DisplayView::show_error404();
     }
     else
     {
         $nomTable = "t_utilisateur_uti";
-        $result = is_validateform(get_fieldConnexionConfig(), $_POST, $nomTable);
+        $result = ManageForm::is_validateform(get_fieldConnexionConfig(), $_POST, $nomTable);
         if(count($result['errors']) == 0)
         {
             $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConnexionConfig()['connexion_pseudo']['tableField']);
             if (empty($user))
             {
                 $result['finalMessage'] = "Veuillez d'abord vous inscrire";
+                DisplayView::show_view(get_pageInfos(), 'index', $result);
             }
             else 
             {
-                if (check_password($user[get_fieldConnexionConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
+                if (ManageConnection::check_password($user[get_fieldConnexionConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
                 {
                     $result['finalMessage'] = "";
-                    start_connection ($user);
+                    ManageConnection::start_connection ($user);
                     if ($user['uti_compte_active'] == 1)
                     {
                         $_SESSION['activated'] = true;
@@ -69,7 +70,7 @@ function try_connection ()
                 else 
                 {
                     $result['finalMessage'] = 'Mot de passe erroné';
-                    show_view(get_pageInfos(), 'index', $result);
+                    DisplayView::show_view(get_pageInfos(), 'index', $result);
                 }
             }
         }

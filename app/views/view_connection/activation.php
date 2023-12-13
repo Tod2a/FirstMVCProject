@@ -1,7 +1,7 @@
 <h2>Activation du compte</h2>
 <form method="post">
 <input type="hidden" value="activationCompte" id="formNom" name="formNom">
-<input type="hidden" name="csrf_token" value="<?=set_CSRFToken()?>">
+<input type="hidden" name="csrf_token" value="<?=ManageForm::set_CSRFToken()?>">
 <input type="hidden" value="<?=$_SESSION['id'] ?? '' ?>" id="activation_utilisateurId" name="activation_utilisateurId">
     
 <label for="activation_code">Entrez votre code d'activation<label><br>

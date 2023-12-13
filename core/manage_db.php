@@ -1,33 +1,39 @@
 <?php
-const SERVEUR = 'localhost';
-const UTILISATEUR = 'root';
-const MDP = '';
-const BDD = "bdd_projet_web";
 
-function connect_db (string $nomDuServeur = SERVEUR, string $nomBDD = BDD, string $nomUtilisateur = UTILISATEUR, string $motDePasse = MDP)
+class ManageDb
 {
-    try
+
+    private const SERVEUR = 'localhost';
+    private const UTILISATEUR = 'root';
+    private const MDP = '';
+    private const BDD = "bdd_projet_web";
+
+    public static function connect_db (string $nomDuServeur = self::SERVEUR, string $nomBDD = self::BDD, string $nomUtilisateur = self::UTILISATEUR, string $motDePasse = self::MDP)
     {
+        try
+        {
 
-        $pdo = new PDO("mysql:host=$nomDuServeur;dbname=$nomBDD", $nomUtilisateur, $motDePasse);
+            $pdo = new PDO("mysql:host=$nomDuServeur;dbname=$nomBDD", $nomUtilisateur, $motDePasse);
 
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        }
+        catch(PDOException $e)
+        {
+            echo 'Erreur : ' . $e->getMessage();
+        }
+        return $pdo;
     }
-    catch(PDOException $e)
+
+    public static function get_byId (int $id, string $tableid, string $table)
     {
-        echo 'Erreur : ' . $e->getMessage();
+        $pdo = ManageDb::connect_db();
+        $request = "SELECT * FROM $table WHERE $tableid=$id";
+        $stmt = $pdo->prepare($request);
+        $stmt->execute();
+        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $user[0];
     }
-    return $pdo;
-}
 
-function get_byId (int $id, string $tableid, string $table)
-{
-    $pdo = connect_db();
-    $request = "SELECT * FROM $table WHERE $tableid=$id";
-    $stmt = $pdo->prepare($request);
-    $stmt->execute();
-    $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    return $user[0];
 }
 
 ?>

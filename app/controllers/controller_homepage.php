@@ -14,7 +14,7 @@ function get_pageInfos(){
 function index(): void
 {
     // Afficher la vue "vue_accueil.php".
-    show_view(get_pageInfos(), 'index');
+    DisplayView::show_view(get_pageInfos(), 'index');
 }
 
 ?>

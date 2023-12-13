@@ -4,8 +4,6 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
-require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
-
 require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'model_user.php';
 
 function get_pageInfos()
@@ -20,9 +18,9 @@ function get_pageInfos()
 
 function index ()
 {
-    if (isset($_SESSION['id']) && $_SESSION['actived'] == 0)
+    if (isset($_SESSION['id']) && $_SESSION['activated'] == 0)
     {
-        show_view(get_pageInfos(), 'activation');
+        DisplayView::show_view(get_pageInfos(), 'activation');
     }
     else
     {
@@ -32,23 +30,30 @@ function index ()
 
 function activation ()
 {
-    if (!is_validCSRF()  || !is_validRequestFrequency())
+    if (!ManageForm::is_validCSRFAndFrequency()  )
     {
-        show_error404();
+        DisplayView::show_error404();
     }
     else
     {
         $nomTable = "t_utilisateur_uti";
-        $result = is_validateform(get_fieldActivationConfig(), $_POST, $nomTable);
+        $result = ManageForm::is_validateform(get_fieldActivationConfig(), $_POST, $nomTable);
         if(count($result['errors']) === 0)
         {
             $result['finalMessage'] = set_validation($_POST['activation_code']);
+            if ($result['finalMessage'] === 'Compte activé')
+            {
             header('Location: ' . BASE_URL . '/' . 'connexion');
             exit();
+            }
+            else
+            {
+                DisplayView::show_view(get_pageInfos(), 'activation', $result);
+            }
         }
         else
         {
-            show_view(get_pageInfos(), 'activation', $result);
+            DisplayView::show_view(get_pageInfos(), 'activation', $result);
         }
     }
 }

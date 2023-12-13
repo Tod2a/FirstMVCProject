@@ -18,23 +18,23 @@ function get_pageInfos()
 
 function index ()
 {
-    show_view(get_pageInfos(), 'index');
+    DisplayView::show_view(get_pageInfos(), 'index');
 }
 
 function PostedForm ()
 {
-    if (!is_validCSRF()  || !is_validRequestFrequency())
+    if (!ManageForm::is_validCSRFAndFrequency())
     {
-        show_error404();
+        DisplayView::show_error404();
     }
     else
     {
-    $result = is_validateform(get_fieldConfig(), $_POST);
+    $result = ManageForm::is_validateform(get_fieldConfig(), $_POST);
     if (count($result['errors']) === 0)
     {
-        send_mail($_POST);
+        ManageForm::send_mail($_POST);
     }
-    show_view(get_pageInfos(), 'index', $result);
+    DisplayView::show_view(get_pageInfos(), 'index', $result);
     }
 }
 
