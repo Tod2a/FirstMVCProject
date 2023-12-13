@@ -18,17 +18,17 @@ define('BASE_URL', '');
 // Routes :
 $patterns = ['id' => '\d+'];
 $routes = [
-    get_route('GET', '/', 'controleur_accueil', 'index'),
-    get_route('GET', '/contact', 'controleur_contact', 'index'),
-    get_route('POST', '/contact', 'controleur_contact', 'PostedForm'),
-    get_route('GET', '/connexion', 'controleur_connexion', 'index'),
-    get_route('GET', '/connexion/inscription', 'controleur_inscription', 'index'),
-    get_route('POST', 'connexion/inscription', 'controleur_inscription', 'send_inscription'),
-    get_route('POST', 'connexion', 'controleur_connexion', 'try_connection'),
-    get_route('GET', 'connexion/activation', 'controleur_activation', 'index'),
-    get_route('POST', 'connexion/activation', 'controleur_activation', 'activation'),
-    get_route('GET', 'connexion/profil', 'controleur_profil', 'index'),
-    get_route('POST', 'connexion/profil', 'controleur_profil', 'disconect')
+    get_route('GET', '/', 'controller_homepage', 'index'),
+    get_route('GET', '/contact', 'controller_contact', 'index'),
+    get_route('POST', '/contact', 'controller_contact', 'PostedForm'),
+    get_route('GET', '/connexion', 'controller_connection', 'index'),
+    get_route('GET', '/connexion/inscription', 'controller_registration', 'index'),
+    get_route('POST', 'connexion/inscription', 'controller_registration', 'send_registration'),
+    get_route('POST', 'connexion', 'controller_connection', 'try_connection'),
+    get_route('GET', 'connexion/activation', 'controller_activation', 'index'),
+    get_route('POST', 'connexion/activation', 'controller_activation', 'activation'),
+    get_route('GET', 'connexion/profil', 'controller_profile', 'index'),
+    get_route('POST', 'connexion/profil', 'controller_profile', 'disconect')
 ];
 
 start_router($routes, $patterns);

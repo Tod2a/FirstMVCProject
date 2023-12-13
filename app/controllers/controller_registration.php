@@ -21,7 +21,7 @@ function index ()
     show_view(get_pageInfos(), 'inscription');
 }
 
-function send_inscription ()
+function send_registration ()
 {
     if (!is_validCSRF() || !is_validRequestFrequency())
     {
