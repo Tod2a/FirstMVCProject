@@ -29,7 +29,7 @@ function PostedForm ()
     }
     else
     {
-    $result = ManageForm::is_validateform(get_fieldConfig(), $_POST);
+    $result = ManageForm::is_validateform(ModelContact::get_fieldConfig(), $_POST);
     if (count($result['errors']) === 0)
     {
         ManageForm::send_mail($_POST);

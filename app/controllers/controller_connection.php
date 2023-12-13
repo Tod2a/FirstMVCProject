@@ -39,10 +39,10 @@ function try_connection ()
     else
     {
         $nomTable = "t_utilisateur_uti";
-        $result = ManageForm::is_validateform(get_fieldConnexionConfig(), $_POST, $nomTable);
+        $result = ManageForm::is_validateform(ModelUser::get_fieldConnexionConfig(), $_POST, $nomTable);
         if(count($result['errors']) == 0)
         {
-            $user = get_userByPseudo($_POST['connexion_pseudo'], get_fieldConnexionConfig()['connexion_pseudo']['tableField']);
+            $user = ModelUser::get_userByPseudo($_POST['connexion_pseudo'], ModelUser::get_fieldConnexionConfig()['connexion_pseudo']['tableField']);
             if (empty($user))
             {
                 $result['finalMessage'] = "Veuillez d'abord vous inscrire";
@@ -50,7 +50,7 @@ function try_connection ()
             }
             else 
             {
-                if (ManageConnection::check_password($user[get_fieldConnexionConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
+                if (ManageConnection::check_password($user[ModelUser::get_fieldConnexionConfig()['connexion_motDePasse']['tableField']], $_POST['connexion_motDePasse']))
                 {
                     $result['finalMessage'] = "";
                     ManageConnection::start_connection ($user);
@@ -62,7 +62,7 @@ function try_connection ()
                     else
                     {
                         $_SESSION['activated'] = false;
-                        set_activationCode($_SESSION['id']);
+                        ModelUser::set_activationCode($_SESSION['id']);
                         header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'activation');
                         exit();
                     }

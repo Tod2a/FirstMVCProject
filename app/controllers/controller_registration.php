@@ -29,10 +29,10 @@ function send_registration ()
     }
     else
     {
-    $result = MAnageForm::is_validateform(get_fieldInscriptionConfig(), $_POST, TABLE);
+    $result = ManageForm::is_validateform(ModelUser::get_fieldInscriptionConfig(), $_POST, ModelUser::get_table());
     if(count($result['errors']) === 0)
     {
-        $result['finalMessage'] = insert_values($_POST, get_fieldInscriptionConfig(), TABLE);
+        $result['finalMessage'] = ModelUser::insert_values($_POST, ModelUser::get_fieldInscriptionConfig());
     }
     DisplayView::show_view(get_pageInfos(), 'registration', $result);
     }

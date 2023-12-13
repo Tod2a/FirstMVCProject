@@ -37,10 +37,10 @@ function activation ()
     else
     {
         $nomTable = "t_utilisateur_uti";
-        $result = ManageForm::is_validateform(get_fieldActivationConfig(), $_POST, $nomTable);
+        $result = ManageForm::is_validateform(ModelUser::get_fieldActivationConfig(), $_POST, $nomTable);
         if(count($result['errors']) === 0)
         {
-            $result['finalMessage'] = set_validation($_POST['activation_code']);
+            $result['finalMessage'] = ModelUser::set_validation($_POST['activation_code']);
             if ($result['finalMessage'] === 'Compte activé')
             {
             header('Location: ' . BASE_URL . '/' . 'connexion');

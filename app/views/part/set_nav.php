@@ -1,16 +1,19 @@
 <?php
 
-function set_nav (string $pageName, string $segmentULR)
+class SetNav
 {
-    if ($_SERVER["REDIRECT_URL"] == $segmentULR)
+    public static function set_navToken (string $pageName, string $segmentULR)
     {
-        $answer = "<li><a href=\"$segmentULR\" class=\"active\">$pageName</a></li>";
+        if ($_SERVER["REDIRECT_URL"] == $segmentULR)
+        {
+            $answer = "<li><a href=\"$segmentULR\" class=\"active\">$pageName</a></li>";
+        }
+        else
+        {
+            $answer = "<li><a href=\"$segmentULR\">$pageName</a></li>";
+        }
+        return $answer;
     }
-    else
-    {
-        $answer = "<li><a href=\"$segmentULR\">$pageName</a></li>";
-    }
-    return $answer;
 }
 
 ?>

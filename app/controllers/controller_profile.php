@@ -24,7 +24,7 @@ function index()
 {
     if (ManageConnection::is_connected() )
     {
-        $user = ManageDb::get_byId($_SESSION['id'], 'uti_id', TABLE);
+        $user = ManageDb::get_byId($_SESSION['id'], 'uti_id', ModelUser::get_table());
         DisplayView::show_view(get_pageInfos(), 'profile', $user);
     }
     else

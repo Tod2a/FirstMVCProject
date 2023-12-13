@@ -6,11 +6,11 @@ require_once dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 if (ManageConnection::is_connected())
 {
-    $html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Profil", "/connexion/profil");
+    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Profil", "/connexion/profil");
 }
 else
 {
-    $html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Connexion", "/connexion");
+    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Connexion", "/connexion");
 }
 
 ?>
