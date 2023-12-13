@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_view.php';
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
@@ -26,7 +26,7 @@ function index ()
     }
     else
     {
-        show_vue(get_pageInfos(), 'index');
+        show_view(get_pageInfos(), 'index');
     }
 }
 
@@ -69,7 +69,7 @@ function try_connection ()
                 else 
                 {
                     $result['finalMessage'] = 'Mot de passe erroné';
-                    show_vue(get_pageInfos(), 'index', $result);
+                    show_view(get_pageInfos(), 'index', $result);
                 }
             }
         }

@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_view.php';
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
@@ -22,7 +22,7 @@ function index ()
 {
     if (isset($_SESSION['id']) && $_SESSION['actived'] == 0)
     {
-        show_vue(get_pageInfos(), 'activation');
+        show_view(get_pageInfos(), 'activation');
     }
     else
     {
@@ -48,7 +48,7 @@ function activation ()
         }
         else
         {
-            show_vue(get_pageInfos(), 'activation', $result);
+            show_view(get_pageInfos(), 'activation', $result);
         }
     }
 }

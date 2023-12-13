@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_view.php';
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
@@ -18,7 +18,7 @@ function get_pageInfos()
 
 function index ()
 {
-    show_vue(get_pageInfos(), 'inscription');
+    show_view(get_pageInfos(), 'inscription');
 }
 
 function send_inscription ()
@@ -34,7 +34,7 @@ function send_inscription ()
     {
         $result['finalMessage'] = insert_values($_POST, get_fieldInscriptionConfig(), $nomTable);
     }
-    show_vue(get_pageInfos(), 'inscription', $result);
+    show_view(get_pageInfos(), 'inscription', $result);
     }
 }
 

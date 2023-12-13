@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_vue.php';
+require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'display_view.php';
 
 function get_pageInfos(){
     return [
@@ -14,7 +14,7 @@ function get_pageInfos(){
 function index(): void
 {
     // Afficher la vue "vue_accueil.php".
-    show_vue(get_pageInfos(), 'index');
+    show_view(get_pageInfos(), 'index');
 }
 
 ?>
