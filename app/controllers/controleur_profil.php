@@ -13,8 +13,8 @@ require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SE
 function get_pageInfos()
 {
     return [
-        'vue' => 'vue_connexion',
-        'titre' => "Page de profil",
+        'view' => 'vue_connexion',
+        'title' => "Page de profil",
         'description' => "Page de profil",
         'baseUrl' => BASE_URL . '/' . 'connexion' . '/' . 'profil'
     ];

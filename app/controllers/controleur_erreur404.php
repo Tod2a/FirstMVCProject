@@ -7,8 +7,8 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 function get_pageInfos(): array
 {
     return [
-        'vue' => 'vue_erreur404',
-        'titre' => "Page d'Erreur 404",
+        'view' => 'vue_erreur404',
+        'title' => "Page d'Erreur 404",
         'description' => "Description de la page d'erreur 404..."
     ];
 }

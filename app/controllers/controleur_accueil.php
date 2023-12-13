@@ -4,8 +4,8 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 function get_pageInfos(){
     return [
-    'vue' => 'vue_accueil',
-    'titre' => "Page d'Accueil",
+    'view' => 'vue_accueil',
+    'title' => "Page d'Accueil",
     'description' => "Description de la page d'accueil...",
     //?????
     'baseUrl' => BASE_URL . '/'

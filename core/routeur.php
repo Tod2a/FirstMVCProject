@@ -1,6 +1,6 @@
 <?php
 // Fonction pour obtenir une route :
-function obtenir_route(string $methode, string $chemin, string $controleur, string $action): array
+function get_route(string $methode, string $chemin, string $controleur, string $action): array
 {
     return [
         'methode' => $methode,
@@ -22,7 +22,7 @@ function preparer_cheminPourComparaisonUrl(string $chemin, array $patterns): str
 }
 
 // Fonction pour tester les routes :
-function demarrer_routeur(array $routes, ?array $patterns = []): void
+function start_router(array $routes, ?array $patterns = []): void
 {
     // Récupérer les différents segments de l'URL dans "$_GET['url']".
     // Ceci est rendu possible grace à cette ligne dans le fichier ".htaccess" : RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]

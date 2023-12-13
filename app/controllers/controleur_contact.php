@@ -9,8 +9,8 @@ require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SE
 function get_pageInfos()
 {
     return [
-        'vue' => 'vue_contact',
-        'titre' => "Formulaire de contact",
+        'view' => 'vue_contact',
+        'title' => "Formulaire de contact",
         'description' => "Formulaire de contact",
         'baseUrl' => BASE_URL . '/' . 'contact' . '/'
     ];
