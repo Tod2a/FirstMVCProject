@@ -68,7 +68,7 @@ function demarrer_routeur(array $routes, ?array $patterns = []): void
 function charger_controleur(string $controleur, string $action, ?array $urlParams = []): void
 {
     // Charger le contrôleur.
-    require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'controleurs' . DIRECTORY_SEPARATOR . $controleur . '.php';
+    require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . $controleur . '.php';
 
     // Appeler la fonction adéquate du contrôleur.
     $action(...$urlParams);

@@ -8,13 +8,13 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_db.php';
 
-require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'modeles' . DIRECTORY_SEPARATOR . 'modele_user.php';
+require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'modele_user.php';
 
 function get_pageInfos()
 {
     return [
         'vue' => 'vue_connexion',
-        'titre' => "Page de prifl",
+        'titre' => "Page de profil",
         'description' => "Page de profil",
         'baseUrl' => BASE_URL . '/' . 'connexion' . '/' . 'profil'
     ];

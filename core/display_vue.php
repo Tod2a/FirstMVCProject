@@ -3,7 +3,7 @@
 //fonction qui va "monter" la page avec l'entete et le fichier souhaiter
 function show_vue (array $pageInfos, string $action, ?array $args = null)
 {
-    $roadOfVues = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'vues' . DIRECTORY_SEPARATOR;
+    $roadOfVues = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR;
 
     $roadOfVuesPart = $roadOfVues . DIRECTORY_SEPARATOR . 'part' . DIRECTORY_SEPARATOR;
 
