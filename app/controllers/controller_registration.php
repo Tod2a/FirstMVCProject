@@ -4,12 +4,12 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
-require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'modele_user.php';
+require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'model_user.php';
 
 function get_pageInfos()
 {
     return [
-        'view' => 'vue_connexion',
+        'view' => 'view_connection',
         'title' => "Page d'inscription",
         'description' => "Page d'inscription",
         'baseUrl' => BASE_URL . '/' . 'connexion' . '/' . 'inscription'
@@ -18,7 +18,7 @@ function get_pageInfos()
 
 function index ()
 {
-    show_view(get_pageInfos(), 'inscription');
+    show_view(get_pageInfos(), 'registration');
 }
 
 function send_registration ()
@@ -34,7 +34,7 @@ function send_registration ()
     {
         $result['finalMessage'] = insert_values($_POST, get_fieldInscriptionConfig(), $nomTable);
     }
-    show_view(get_pageInfos(), 'inscription', $result);
+    show_view(get_pageInfos(), 'registration', $result);
     }
 }
 

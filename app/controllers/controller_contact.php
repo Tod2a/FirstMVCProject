@@ -4,12 +4,12 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_form.php';
 
-require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'modele_contact.php';
+require_once dirname(__DIR__, 1) . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'model_contact.php';
 
 function get_pageInfos()
 {
     return [
-        'view' => 'vue_contact',
+        'view' => 'view_contact',
         'title' => "Formulaire de contact",
         'description' => "Formulaire de contact",
         'baseUrl' => BASE_URL . '/' . 'contact' . '/'

@@ -22,7 +22,7 @@ function show_error404()
     // Indiquer au navigateur qu'il s'agit d'une erreur 404.
     header("HTTP/1.0 404 Not Found");
     // Charger la vue pour la page d'erreur 404.
-    show_vue(['view' => 'vue_erreur404', 'titre' => "Erreur404",], 'index');
+    show_vue(['view' => 'view_error404', 'title' => "Erreur404",], 'index');
     exit();
 }
 

@@ -4,7 +4,7 @@ require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPA
 
 function get_pageInfos(){
     return [
-    'view' => 'vue_accueil',
+    'view' => 'view_homepage',
     'title' => "Page d'Accueil",
     'description' => "Description de la page d'accueil...",
     //?????

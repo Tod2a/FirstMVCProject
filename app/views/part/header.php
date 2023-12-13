@@ -2,7 +2,16 @@
 
 require_once 'set_nav.php';
 
-$html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Connexion", "/connexion");
+require_once dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
+
+if (is_connected())
+{
+    $html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Profil", "/connexion/profil");
+}
+else
+{
+    $html = set_nav("Accueil", "/") . set_nav("Contact", BASE_URL . '/contact') . set_nav("Connexion", "/connexion");
+}
 
 ?>
 
