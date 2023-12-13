@@ -3,7 +3,7 @@
 
 session_start();
 
-require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'routeur.php';
+require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'router.php';
 
 // Etat de l'environnement : 'dev' en mode développement ou 'prod' en mode production.
 // Ceci me permet d'utiliser des conditions pour réaliser certaines actions seulement si je suis dans un mode spécifique.
@@ -17,18 +17,18 @@ define('BASE_URL', '');
 
 // Routes :
 $patterns = ['id' => '\d+'];
-$routes = [
-    get_route('GET', '/', 'controller_homepage', 'index'),
-    get_route('GET', '/contact', 'controller_contact', 'index'),
-    get_route('POST', '/contact', 'controller_contact', 'PostedForm'),
-    get_route('GET', '/connexion', 'controller_connection', 'index'),
-    get_route('GET', '/connexion/inscription', 'controller_registration', 'index'),
-    get_route('POST', 'connexion/inscription', 'controller_registration', 'send_registration'),
-    get_route('POST', 'connexion', 'controller_connection', 'try_connection'),
-    get_route('GET', 'connexion/activation', 'controller_activation', 'index'),
-    get_route('POST', 'connexion/activation', 'controller_activation', 'activation'),
-    get_route('GET', 'connexion/profil', 'controller_profile', 'index'),
-    get_route('POST', 'connexion/profil', 'controller_profile', 'disconect')
-];
 
-start_router($routes, $patterns);
+Router::config_route('GET', '/', 'controller_homepage', 'index');
+Router::config_route('GET', '/contact', 'controller_contact', 'index');
+Router::config_route('POST', '/contact', 'controller_contact', 'PostedForm');
+Router::config_route('GET', '/connexion', 'controller_connection', 'index');
+Router::config_route('GET', '/connexion/inscription', 'controller_registration', 'index');
+Router::config_route('POST', 'connexion/inscription', 'controller_registration', 'send_registration');
+Router::config_route('POST', 'connexion', 'controller_connection', 'try_connection');
+Router::config_route('GET', 'connexion/activation', 'controller_activation', 'index');
+Router::config_route('POST', 'connexion/activation', 'controller_activation', 'activation');
+Router::config_route('GET', 'connexion/profil', 'controller_profile', 'index');
+Router::config_route('POST', 'connexion/profil', 'controller_profile', 'disconect');
+
+
+Router::start_router($patterns);
