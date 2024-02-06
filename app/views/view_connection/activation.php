@@ -1,3 +1,4 @@
+<?php use Core\ManageForm ?>
 <h2>Activation du compte</h2>
 <form method="post">
 <input type="hidden" value="activationCompte" id="formNom" name="formNom">

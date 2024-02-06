@@ -1,3 +1,4 @@
+<?php use Core\ManageForm ?>
 <h2>Connexion</h2>
 
 <form method="post">

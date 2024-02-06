@@ -1,6 +1,9 @@
 <?php
+namespace Core;
 
-require_once 'manage_db.php';
+use \PDO;
+
+use Core\ManageDb;
 
 class ManageForm
 {

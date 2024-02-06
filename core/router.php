@@ -1,29 +1,30 @@
 <?php
+namespace Core;
 
 class Router
 {
     private static $routes = [];
 
         // Fonction pour obtenir une route :
-        public static function config_route(string $methode, string $chemin, string $controleur, string $action): void
+        public static function config_route(string $methode, string $path, string $controleur, string $action): void
         {
             self::$routes[] = [
                 'methode' => $methode,
-                'chemin' => $chemin,
+                'chemin' => $path,
                 'controleur' => $controleur,
                 'action' => $action,
             ];
         }
 
-        private static function preparer_cheminPourComparaisonUrl(string $chemin, array $patterns): string
+        private static function prepare_pathForComparisonUrl(string $path, array $patterns): string
         {
             // Parcourir les patterns :
             foreach ($patterns as $marqueur => $pattern)
             {
                 // Remplacer {marqueur} par l'expression régulière correspondant.
-                $chemin = str_replace('{' . $marqueur . '}', '(' . $pattern . ')', $chemin);
+                $path = str_replace('{' . $marqueur . '}', '(' . $pattern . ')', $path);
             }
-            return $chemin;
+            return $path;
         }
 
         // Fonction pour tester les routes :
@@ -53,7 +54,7 @@ class Router
                 $chemin = trim($route['chemin'], '/');
             
                 // Préparer le chemin pour vérifier s'il correspond à l'URL et ce même si celui-ci est composé de marqueur (ex.: {id}).
-                $chemin = Router::preparer_cheminPourComparaisonUrl($chemin, $patterns);
+                $chemin = Router::prepare_pathForComparisonUrl($chemin, $patterns);
             
                 // Vérifier si la route courante correspond à l'URL et si les méthodes sont identiques.
                 if ($route['methode'] === $methode && preg_match("#^$chemin$#", $url, $matches))
@@ -61,24 +62,23 @@ class Router
                     // Préparer les paramètres d'URL pour pouvoir les transmettre proprement au contrôleur :
                     array_shift($matches);
                 
-                    Router::charger_controleur($route['controleur'], $route['action'], $matches);
+                    Router::load_controller($route['controleur'], $route['action'], $matches);
                     return;
                 }
             }
         
             // Charger le contrôleur pour la page d'erreur 404.
-            Router::charger_controleur('controleur_erreur404', 'index');
+            Router::load_controller('controleur_erreur404', 'index');
         }
 
-        private static function charger_controleur(string $controleur, string $action, ?array $urlParams = []): void
+        private static function load_controller(string $controleur, string $action, ?array $urlParams = []): void
         {
             // Charger le contrôleur.
-            require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'controllers' . DIRECTORY_SEPARATOR . $controleur . '.php';
-        
-            // Appeler la fonction adéquate du contrôleur.
-            $action(...$urlParams);
-        }
+            require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . $controleur . '.php';
 
+            // Appeler la méthode statique à partir des deux chaînes de caractères et lui communiquer les potentiels paramètres récupérés dans l'URL (id, slug, etc.)
+            call_user_func(["\\app\\controllers\\$controleur", $action], ...$urlParams);
+        }
 }
 
 ?>

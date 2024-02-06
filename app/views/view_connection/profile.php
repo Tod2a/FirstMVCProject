@@ -1,3 +1,4 @@
+<?php use Core\ManageForm ?>
 <h2>Votre profil</h2>
 <p class="profil">
 Votre pseudo: <?=$args['uti_pseudo'] ?? '' ?><br>

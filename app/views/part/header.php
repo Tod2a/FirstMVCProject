@@ -1,8 +1,7 @@
 <?php
+use App\Views\Part\SetNav;
 
-require_once 'set_nav.php';
-
-require_once dirname(__DIR__, 3) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_connection.php';
+use Core\ManageConnection;
 
 if (ManageConnection::is_connected())
 {

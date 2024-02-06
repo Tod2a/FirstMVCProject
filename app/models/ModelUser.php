@@ -1,6 +1,9 @@
 <?php
+namespace App\Models;
 
-require_once dirname(__DIR__, 2) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'manage_db.php';
+use Core\ManageDb;
+
+use \PDO;
 
 class ModelUser
 {

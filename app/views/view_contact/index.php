@@ -1,3 +1,4 @@
+<?php use Core\ManageForm ?>
 <h2>Contact</h2>
 
 <form method="post">
