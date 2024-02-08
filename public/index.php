@@ -27,7 +27,7 @@ $patterns = ['id' => '\d+'];
 
 Router::config_route('GET', '/', 'ControllerHomepage', 'index');
 Router::config_route('GET', '/contact', 'ControllerContact', 'index');
-Router::config_route('POST', '/contact', 'ControllerContact', 'PostedForm');
+Router::config_route('POST', '/contact', 'ControllerContact', 'postedForm');
 Router::config_route('GET', '/connexion', 'ControllerConnection', 'index');
 Router::config_route('GET', '/connexion/inscription', 'ControllerRegistration', 'index');
 Router::config_route('POST', 'connexion/inscription', 'ControllerRegistration', 'send_registration');
@@ -36,6 +36,7 @@ Router::config_route('GET', 'connexion/activation', 'ControllerActivation', 'ind
 Router::config_route('POST', 'connexion/activation', 'ControllerActivation', 'activation');
 Router::config_route('GET', 'connexion/profil', 'ControllerProfile', 'index');
 Router::config_route('POST', 'connexion/profil', 'ControllerProfile', 'disconect');
+Router::config_route('GET', '/galerie', 'ControllerGallery', 'index');
 
 
 Router::start_router($patterns);

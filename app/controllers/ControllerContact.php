@@ -23,7 +23,7 @@ class ControllerContact
         DisplayView::show_view(self::$pageInfos, 'index');
     }
 
-    public static function PostedForm ()
+    public static function postedForm ()
     {
         if (!ManageForm::is_validCSRFAndFrequency())
         {

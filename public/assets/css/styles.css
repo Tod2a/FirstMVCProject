@@ -118,3 +118,53 @@ li a:hover {
         padding: 1em 2em; /* Ajuster la taille des boutons */
     }
 }
+
+/* Style pour le conteneur global du carousel */
+.carousel {
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Les éléments sont empilés verticalement */
+    align-items: center; /* Centrer les éléments horizontalement */
+}
+
+.carousel-item {
+    position: relative;
+    display: none;
+}
+
+/* Style pour les images à l'intérieur du carousel */
+.carousel-item img {
+    width: 70%; /* Ajuster la largeur de l'image à 70% de la largeur de la fenêtre */
+    height: auto; /* Hauteur automatique pour maintenir le ratio d'aspect */
+    max-height: 70vh;
+    display: block; /* Permettre de centrer l'image horizontalement */
+    margin: 0 auto; /* Centrer l'image horizontalement */
+    padding-bottom: 0.2em;
+}
+
+
+/* Style pour les contrôles de navigation */
+.carousel-controls {
+    display: flex;
+    justify-content: center; /* Centrer les boutons horizontalement */
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: #0077b5;
+    color: #fff;
+    border-radius: 5px;
+    width: 100px;
+    height: 30px;
+    margin: 0 10px; /* Ajouter un espacement entre les boutons */
+    cursor: pointer; /* Curseur pointer pour indiquer l'interactivité */
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    opacity: 0.9;
+}

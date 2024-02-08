@@ -5,11 +5,11 @@ use Core\ManageConnection;
 
 if (ManageConnection::is_connected())
 {
-    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Profil", "/connexion/profil");
+    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Profil", "/connexion/profil") . SetNav::set_navToken("Galerie", "/galerie");
 }
 else
 {
-    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Connexion", "/connexion");
+    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Connexion", "/connexion") . SetNav::set_navToken("Galerie", "/galerie");
 }
 
 ?>
@@ -19,7 +19,7 @@ else
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>/public/ressources/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="<?=BASE_URL?>/public/assets/css/styles.css">
     <title><?=$title?></title>
 </head>
 <body>
