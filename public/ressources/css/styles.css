@@ -93,3 +93,28 @@ li a:hover {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
+
+/* Styles pour les écrans de petite taille */
+@media only screen and (max-width: 600px) {
+    li {
+        margin: 0.5em 0; /* Réduire l'espacement entre les éléments de la navigation */
+    }
+
+    li a {
+        padding: 0.5em 1em; /* Réduire la taille des boutons */
+    }
+}
+
+/* Styles pour les écrans de taille moyenne */
+@media only screen and (min-width: 601px) and (max-width: 1024px) {
+    li a {
+        padding: 0.7em 1.5em; /* Ajuster la taille des boutons */
+    }
+}
+
+/* Styles pour les écrans de grande taille */
+@media only screen and (min-width: 1025px) {
+    li a {
+        padding: 1em 2em; /* Ajuster la taille des boutons */
+    }
+}
