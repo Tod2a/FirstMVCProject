@@ -31,12 +31,20 @@ class ControllerContact
         }
         else
         {
-        $result = ManageForm::is_validateform(ModelContact::get_fieldConfig(), $_POST);
-        if (count($result['errors']) === 0)
-        {
-            ManageForm::send_mail($_POST);
-        }
-        DisplayView::show_view(self::$pageInfos, 'index', $result);
+            $args = ManageForm::is_validateform(ModelContact::get_fieldConfig(), $_POST);
+            if (count($args['errors']) === 0)
+            {
+                ManageForm::send_mail($_POST);
+            }
+            if(isset($_SERVER['HTTP_X_REQUESTED_WITH'])
+            && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest')
+            {
+                require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'views' . DIRECTORY_SEPARATOR . 'view_contact' . DIRECTORY_SEPARATOR . 'contactForm.php';
+            }
+            else
+            {
+                DisplayView::show_view(self::$pageInfos, 'index', $args);
+            }
         }
     }
 }

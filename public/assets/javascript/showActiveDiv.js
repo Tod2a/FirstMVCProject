@@ -1,4 +1,5 @@
-function showActiveDiv (element)
+
+function showActiveDiv (element, classCss)
 {
     const midLane = document.querySelector('#midLane');
     let laneRect = midLane.getBoundingClientRect();
@@ -10,13 +11,11 @@ function showActiveDiv (element)
 
     if (isActiveElement)
     {
-        element.style.backgroundColor = '#8b4513';
-        element.style.color = 'white';
+        element.classList.add(classCss);
     }
     else
     {
-        element.style.backgroundColor = "white";
-        element.style.color = 'black';
+        element.classList.remove(classCss);
     }
 }
 

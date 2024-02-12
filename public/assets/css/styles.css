@@ -172,8 +172,13 @@ li a:hover {
 .contact-section {
     margin-left: 20em;
     margin-right: 20em;
-    margin-top: 5em;
-    margin-bottom: 10em;
+    margin-top: 10em;
+    margin-bottom: 20em;
     padding: 5em;
     border: solid 1px #0077b5;
+}
+
+.contact-active {
+    background-color: #8b4513;
+    color: white;
 }

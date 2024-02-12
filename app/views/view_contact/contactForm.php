@@ -1,7 +1,7 @@
 <?php use Core\ManageForm ?>
 
 
-<form method="post">
+<form id="contactFormJs" method="post">
 <input type="hidden" name="csrf_token" value="<?=ManageForm::set_CSRFToken()?>">
 
 <label for="fname">First Name:</label><br>
