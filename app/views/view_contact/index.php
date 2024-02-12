@@ -13,7 +13,7 @@
 <section id="contact-form" class="contact-section">
     <?php
 
-        require_once dirname(__DIR__) . '..' . DIRECTORY_SEPARATOR . 'part' . DIRECTORY_SEPARATOR . 'contactForm.php';
+        require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'view_contact' . DIRECTORY_SEPARATOR . 'contactForm.php';
 
     ?>
 
