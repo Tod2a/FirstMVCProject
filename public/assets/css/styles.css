@@ -168,3 +168,12 @@ li a:hover {
 .carousel-control-next:hover {
     opacity: 0.9;
 }
+
+.contact-section {
+    margin-left: 20em;
+    margin-right: 20em;
+    margin-top: 5em;
+    margin-bottom: 10em;
+    padding: 5em;
+    border: solid 1px #0077b5;
+}
