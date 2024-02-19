@@ -37,12 +37,12 @@ class ControllerRegistration
         else
         {
             //check if the form is valid
-            $result = ManageForm::is_validateform(ModelUser::get_fieldInscriptionConfig(), $_POST, ModelUser::get_table());
+            $result = ManageForm::is_validateform(ModelUser::get_fieldRegistrationConfig(), $_POST, ModelUser::get_table());
 
             //If no errors, insert the values into the database
             if(count($result['errors']) === 0)
             {
-                $result['finalMessage'] = ModelUser::insert_values($_POST, ModelUser::get_fieldInscriptionConfig());
+                $result['finalMessage'] = ModelUser::insert_values($_POST, ModelUser::get_fieldRegistrationConfig());
             }
 
             //display the registration page with the result
