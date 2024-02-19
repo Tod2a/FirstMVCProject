@@ -1,23 +1,29 @@
+
+// select all items with the class selected
 const carouselItems = document.querySelectorAll('.carousel-item');
 let currentIndex = 0;
 
 function showSlide(index) {
-  // Masquer toutes les images
+  // hide all items
   carouselItems.forEach(item => {
     item.style.display = 'none';
   });
 
-  // Montrer l'image avec l'index spécifié
+  // show the item with the right index
   carouselItems[index].style.display = 'block';
 }
 
+//function next to make index +1
 function nextSlide() {
   currentIndex = (currentIndex + 1) % carouselItems.length;
+  //call the function to set the right item
   showSlide(currentIndex);
 }
 
+//function previous to make index -1
 function previousSlide() {
   currentIndex = (currentIndex - 1 + carouselItems.length) % carouselItems.length;
+  //call the function to set the right item
   showSlide(currentIndex);
 }
 
