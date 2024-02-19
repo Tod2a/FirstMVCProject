@@ -3,11 +3,12 @@ namespace App\Models;
 
 class ModelContact
 {
+    // Field configuration for the contact form
     public static function get_fieldConfig()
     {
         return [
             'fname' => [
-                'requis' => true, 
+                'required' => true, 
                 'minLength' => 2,
                 'maxLength' => 255
             ],
@@ -16,11 +17,11 @@ class ModelContact
                 'maxLength' => 255
             ],
             'email' => [
-                'requis' => true, 
+                'required' => true, 
                 'type' => 'email'
             ],
             'message' => [
-                'requis' => true, 
+                'required' => true, 
                 'minLength' => 10,
                 'maxLength' => 3000
             ]

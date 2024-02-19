@@ -5,6 +5,7 @@ use Core\DisplayView;
 
 class ControllerHomepage
 {
+    //// Define static page information for the homepage
     private static $pageInfos = [
         'view' => 'view_homepage',
         'title' => "Page d'Accueil",
@@ -12,9 +13,9 @@ class ControllerHomepage
         'baseUrl' => BASE_URL . '/'
     ];
 
+    //display the homepage
     public static function index(): void
     {
-        // Afficher la vue "vue_accueil.php".
         DisplayView::show_view(self::$pageInfos, 'index');
     }
 }

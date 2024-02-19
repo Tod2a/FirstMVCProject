@@ -69,7 +69,7 @@ class ManageForm
 
         return true;
     }
-
+    
     //fonction qui automatise le formatage des balises d'access.
     private static function format_access (string $field) 
     {
@@ -89,7 +89,7 @@ class ManageForm
 
         foreach($fields as $fieldName => $entry)
         {
-            if (!ManageForm::is_empty($fieldName, $userEntries) && isset($entry['requis']) && $entry['requis'] === true)
+            if (!ManageForm::is_empty($fieldName, $userEntries) && isset($entry['required']) && $entry['required'] === true)
             {
                 $errors[$fieldName] = "Ce champ est requis.";
                 $access[$fieldName] = ManageForm::format_access($fieldName);
