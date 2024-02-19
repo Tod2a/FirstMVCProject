@@ -42,7 +42,7 @@ class ControllerContact
             //if no errors, send the mail
             if (count($args['errors']) === 0)
             {
-                ManageForm::send_mail($_POST);
+                ModelContact::send_mail($_POST);
             }
 
             //check if the request is a javascript request

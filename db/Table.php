@@ -4,16 +4,18 @@ $nomUtilisateur = 'root';
 $motDePasse = '';
 $nomBDD = "bdd_projet_web";
 
-// Tenter d'établir une connexion à la base de données :
+// Script used to create the table
+// Try to establish a connection to the database:
 try
 {
-    // Instancier une nouvelle connexion.
-    $pdo = new PDO("mysql:host=$nomDuServeur;dbname=$nomBDD", $nomUtilisateur, $motDePasse);
+    // Instantiate a new connection.
+    $pdo = new PDO("mysql:host=$serverName;dbname=$dbName", $username, $password);
 
-    // Définir le mode d'erreur sur "exception".
+    // Set the error mode to "exception".
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $requete = "
+    // SQL query to create the "t_utilisateur_uti" table.
+    $query = "
         CREATE TABLE t_utilisateur_uti (
             uti_id INT AUTO_INCREMENT PRIMARY KEY,
             uti_pseudo VARCHAR(255) NOT NULL UNIQUE,
@@ -25,12 +27,13 @@ try
         )
     ";
 
-    // Exécuter la requête SQL pour créer la table "t_utilisateur_uti".
-    $pdo->exec($requete);
+    // Execute the SQL query to create the "t_utilisateur_uti" table.
+    $pdo->exec($query);
 }
-// Capturer les exceptions en cas d'erreur de connexion :
+// Catch exceptions in case of a connection error:
 catch(PDOException $e)
 {
-    echo 'Erreur : ' . $e->getMessage();
+    echo 'Error: ' . $e->getMessage();
 }
+
 ?>

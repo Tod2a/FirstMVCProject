@@ -5,80 +5,79 @@ class Router
 {
     private static $routes = [];
 
-        // Fonction pour obtenir une route :
-        public static function config_route(string $methode, string $path, string $controleur, string $action): void
-        {
-            self::$routes[] = [
-                'methode' => $methode,
-                'chemin' => $path,
-                'controleur' => $controleur,
-                'action' => $action,
-            ];
-        }
+    // Function to configure a route:
+    public static function config_route(string $method, string $path, string $controller, string $action): void
+    {
+        self::$routes[] = [
+            'method' => $method,
+            'path' => $path,
+            'controller' => $controller,
+            'action' => $action,
+        ];
+    }
 
-        private static function prepare_pathForComparisonUrl(string $path, array $patterns): string
+    private static function prepare_pathForComparisonUrl(string $path, array $patterns): string
+    {
+        // Iterate through patterns:
+        foreach ($patterns as $marker => $pattern)
         {
-            // Parcourir les patterns :
-            foreach ($patterns as $marqueur => $pattern)
+            // Replace {marker} with the corresponding regular expression.
+            $path = str_replace('{' . $marker . '}', '(' . $pattern . ')', $path);
+        }
+        return $path;
+    }
+
+    // Function to test routes:
+    public static function start_router(?array $patterns = []): void
+    {
+        // Retrieve different segments of the URL from "$_GET['url']".
+        // This is made possible by this line in the ".htaccess" file: RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
+        // Prevent code injections using the filter_input function:
+            // "INPUT_GET" indicates that the function should retrieve the variable from the "$_GET" superglobal.
+            // "url" is the name assigned in the ".htaccess" file.
+            // "FILTER_SANITIZE_URL" is the filter used to clean the variable by removing all illegal characters from a URL.
+        $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL) ?? "";
+    
+        // Remove slashes at the beginning and end of the URL.
+        $url = trim($url, '/');
+    
+        // Get the method of the server request ("GET" or "POST").
+        $method = $_SERVER['REQUEST_METHOD'];
+    
+        // If the method is "POST," check if a specific method has been added in the hidden form fields ("PUT" or "DELETE").
+        $method = $method === 'POST' && isset($_POST['_method']) ? strtoupper($_POST['_method']) : $method;
+    
+        // Process each route:
+        foreach (self::$routes as $route)
+        {
+            // Remove slashes at the beginning and end of the URL.
+            $path = trim($route['path'], '/');
+        
+            // Prepare the path to check if it matches the URL, even if it contains placeholders (e.g., {id}).
+            $path = Router::prepare_pathForComparisonUrl($path, $patterns);
+        
+            // Check if the current route matches the URL and if the methods are identical.
+            if ($route['method'] === $method && preg_match("#^$path$#", $url, $matches))
             {
-                // Remplacer {marqueur} par l'expression régulière correspondant.
-                $path = str_replace('{' . $marqueur . '}', '(' . $pattern . ')', $path);
-            }
-            return $path;
-        }
-
-        // Fonction pour tester les routes :
-        public static function start_router(?array $patterns = []): void
-        {
-            // Récupérer les différents segments de l'URL dans "$_GET['url']".
-            // Ceci est rendu possible grace à cette ligne dans le fichier ".htaccess" : RewriteRule ^(.*)$ public/index.php?url=$1 [QSA,L]
-            // Éviter les injection de code à l'aide de la fonction filter_input :
-                // "INPUT_GET" indique que la fonction doit récupérer la variable depuis la superglobale "$_GET".
-                // "url" est le nom qu'on lui a attribué dans le fichier ".htaccess"
-                // "FILTER_SANITIZE_URL" est le filtre utilisé pour nettoyer la variable en supprimant tous les caractères illégaux d'une URL.
-            $url = filter_input(INPUT_GET, 'url', FILTER_SANITIZE_URL) ?? "";
-        
-            // Effacer les slashs présent au début et en fin d'url.
-            $url = trim($url, '/');
-        
-            // Récupérer la méthode de la requête serveur ("GET" ou "POST").
-            $methode = $_SERVER['REQUEST_METHOD'];
-        
-            // Si la méthode est "POST", on vérifie si une méthode particulière a été ajoutée dans les champs cachés du formulaire ("PUT" ou "DELETE").
-            $methode = $methode === 'POST' && isset($_POST['_methode']) ? strtoupper($_POST['_methode']) : $methode;
-        
-            // Traiter chaque route :
-            foreach (self::$routes as $route)
-            {
-                // Effacer les slashs présent au début et en fin d'URL.
-                $chemin = trim($route['chemin'], '/');
+                // Prepare URL parameters to cleanly pass them to the controller:
+                array_shift($matches);
             
-                // Préparer le chemin pour vérifier s'il correspond à l'URL et ce même si celui-ci est composé de marqueur (ex.: {id}).
-                $chemin = Router::prepare_pathForComparisonUrl($chemin, $patterns);
-            
-                // Vérifier si la route courante correspond à l'URL et si les méthodes sont identiques.
-                if ($route['methode'] === $methode && preg_match("#^$chemin$#", $url, $matches))
-                {
-                    // Préparer les paramètres d'URL pour pouvoir les transmettre proprement au contrôleur :
-                    array_shift($matches);
-                
-                    Router::load_controller($route['controleur'], $route['action'], $matches);
-                    return;
-                }
+                Router::load_controller($route['controller'], $route['action'], $matches);
+                return;
             }
-        
-            // Charger le contrôleur pour la page d'erreur 404.
-            Router::load_controller('controleur_erreur404', 'index');
         }
+    
+        // Load the controller for the 404 error page.
+        Router::load_controller('controller_error404', 'index');
+    }
 
-        private static function load_controller(string $controleur, string $action, ?array $urlParams = []): void
-        {
-            // Charger le contrôleur.
-            require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . $controleur . '.php';
+    private static function load_controller(string $controller, string $action, ?array $urlParams = []): void
+    {
+        // Load the controller.
+        require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'app' . DIRECTORY_SEPARATOR . 'Controllers' . DIRECTORY_SEPARATOR . $controller . '.php';
 
-            // Appeler la méthode statique à partir des deux chaînes de caractères et lui communiquer les potentiels paramètres récupérés dans l'URL (id, slug, etc.)
-            call_user_func(["\\app\\controllers\\$controleur", $action], ...$urlParams);
-        }
+        // Call the static method from the two strings and pass any potential parameters retrieved from the URL (id, slug, etc.).
+        call_user_func(["\\app\\controllers\\$controller", $action], ...$urlParams);
+    }
 }
-
 ?>

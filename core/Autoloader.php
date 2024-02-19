@@ -11,6 +11,7 @@ class Autoloader
 
     private static function load_config(): void
 	{
+        // Load the autoloader configuration from the 'config.json' file.
 		$config = dirname(__DIR__) . DIRECTORY_SEPARATOR . 'config' . DIRECTORY_SEPARATOR . 'config.json';
         self::$config = json_decode(file_get_contents($config), true)['autoloader'];
 	}
@@ -30,38 +31,41 @@ class Autoloader
 	{
         foreach (self::$config as $namespaceConfig => $roads)
         {
-            // Si le namespace présent dans la configuration est trouvé en première position du namespace de la Classe :
+            // If the namespace in the configuration is found at the beginning of the Class's namespace:
             if (strpos($classNamespace, $namespaceConfig) === 0)
             {
-                // Vérifier s'il existe plusieurs roads pour un même namespace. Si le chemin de configuration est unique, le placer dans un tableau.
+                // Check if there are multiple roads for the same namespace. If the configuration path is unique, place it in an array.
                 $roads = is_string($roads) ? [$roads] : $roads;
 
-                // Parcourir les roads :
+                // Iterate through the roads:
                 foreach ($roads as $road)
                 {
-                    // Convertir le namespace par le road vers le fichier de la Classe visée :
+                    // Convert the namespace to the file path for the targeted Class:
                     $filePath = self::convertNamespaceToFilePath($namespaceConfig, $road, $classNamespace);
 
-                    // Vérifier si le fichier contenant la Classe existe :
+                    // Check if the file containing the Class exists:
                     if (file_exists($filePath))
                     {
-                        // Importer la Classe.
+                        // Import the Class.
                         include_once $filePath;
 
-                        // Sortir des deux boucles.
+                        // Exit both loops.
                         break 2;
                     }
                 }
             }
         }
-	}
+    }
 
     private static function convertNamespaceToFilePath(string $namespaceConfig, string $path, string $classNamespace): string
-	{
+    {
+        // Replace the namespace in the Class with the specified path.
         $className = str_replace($namespaceConfig, $path, $classNamespace);
 
+        // Construct the file path for the Class.
         $filePath = dirname(__DIR__) . DIRECTORY_SEPARATOR . $className . '.php';
 
+        // Replace forward slashes with the appropriate directory separator.
         $filePath = str_replace('/', DIRECTORY_SEPARATOR, $filePath);
 
         return $filePath;
