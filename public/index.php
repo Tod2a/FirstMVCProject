@@ -1,28 +1,28 @@
 <?php
 
-//importer l'autoloader
+// Import the autoloader
 require_once dirname(__DIR__) . DIRECTORY_SEPARATOR . 'core' . DIRECTORY_SEPARATOR . 'Autoloader.php';
 
-// start autoloader.
+// Start the autoloader.
 Autoloader::init();
 
-//start de session
+// Start the session
 session_start();
 
-// Importer le routeur.
+// Import the router.
 use Core\Router;
 
-// Etat de l'environnement : 'dev' en mode développement ou 'prod' en mode production.
-// Ceci me permet d'utiliser des conditions pour réaliser certaines actions seulement si je suis dans un mode spécifique.
-// Par exemple, dans le fichier /noyau/gestion_bdd.php, les erreurs ne s'afficheront dans le navigateur que si la constante ENV est configurée sur "dev".
+// Environment state: 'dev' in development mode or 'prod' in production mode.
+// This allows using conditions to perform certain actions only if in a specific mode.
+// For example, in the file /core/database_management.php, errors will only display in the browser if the ENV constant is set to "dev".
 define('ENV', 'dev');
 
-// Chemin de base de l'application (Utile si l'application est hebergée dans un sous-dossier. Dans ce cas, n'oubliez pas d'adapter le fichier .htaccess).
-// Par exemple si votre url racine est le suviant : localhost/monprojet/,
-// Alors vous devrez configurer BASE_URL à '/monprojet' et dans le fichier .htacces : RewriteCond %{REQUEST_URI} !^monprojet/public/
+// Base path of the application (Useful if the application is hosted in a subfolder. In this case, remember to adjust the .htaccess file).
+// For example, if your root URL is the following: localhost/myproject/,
+// Then you should configure BASE_URL to '/myproject' and in the .htaccess file: RewriteCond %{REQUEST_URI} !^myproject/public/
 define('BASE_URL', '');
 
-// Routes :
+// Routes:
 $patterns = ['id' => '\d+'];
 
 Router::config_route('GET', '/', 'ControllerHomepage', 'index');

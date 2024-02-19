@@ -1,18 +1,18 @@
-
+/* Styles for the heading 2 element */
 h2 {
     text-align: center;
     background-color: #c0e3e3; 
     padding: 10px;
 }
-  
 
+/* Styles for form elements */
 form {
     width: 50%;
     margin: 0 auto; 
     padding: 20px;
 }
-  
 
+/* Styles for input and textarea elements */
 input[type="text"],
 input[type="email"],
 input[type="password"],
@@ -23,8 +23,8 @@ textarea {
     border: 1px solid #ccc;
     border-radius: 5px;
 }
-  
-  
+
+/* Styles for submit button */
 input[type="submit"] {
     background-color: #c0e3e3; 
     color: #333; 
@@ -33,24 +33,25 @@ input[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
 }
-  
 
+/* Styles for navigation bar */
 nav {
     background-color: #8b4513; 
     padding: 0.3em  1em;
 }
-  
- 
+
+/* Styles for unordered list in navigation */
 ul {
     list-style: none;
     display: flex;
 }
 
-
+/* Styles for list items in navigation */
 li {
     margin: 0 1em; 
 }
 
+/* Styles for anchor links in navigation */
 li a {
     display: inline-block;
     padding: 1em 2em;
@@ -59,15 +60,18 @@ li a {
     background-color: #654321; 
     border-radius: 5px;
 }
-  
+
+/* Hover styles for anchor links in navigation */
 li a:hover {
     background-color: #996633; 
 }
 
+/* Active state style for navigation */
 .active {
     color: red;
 }
 
+/* Styles for internal links */
 .internal_link {
     display: block;
     text-align: center;
@@ -80,12 +84,14 @@ li a:hover {
     width: 100px; 
     height: 30px; 
 }
-  
+
+/* Hover styles for internal links */
 .internal_link:hover {
-   background-color: #00558e; 
-   color: #fff; 
+    background-color: #00558e; 
+    color: #fff;
 }
 
+/* Styles for profile section */
 .profil {
     width: 50%;
     margin: 0 auto; 
@@ -94,61 +100,62 @@ li a:hover {
     border-radius: 5px;
 }
 
-/* Styles pour les écrans de petite taille */
+/* Media queries for small screens */
 @media only screen and (max-width: 600px) {
     li {
-        margin: 0.5em 0; /* Réduire l'espacement entre les éléments de la navigation */
+        margin: 0.5em 0; /* Reduce spacing between navigation elements */
     }
 
     li a {
-        padding: 0.5em 1em; /* Réduire la taille des boutons */
+        padding: 0.5em 1em; /* Reduce button size */
     }
 }
 
-/* Styles pour les écrans de taille moyenne */
+/* Media queries for medium screens */
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
     li a {
-        padding: 0.7em 1.5em; /* Ajuster la taille des boutons */
+        padding: 0.7em 1.5em; /* Adjust button size */
     }
 }
 
-/* Styles pour les écrans de grande taille */
+/* Media queries for large screens */
 @media only screen and (min-width: 1025px) {
     li a {
-        padding: 1em 2em; /* Ajuster la taille des boutons */
+        padding: 1em 2em; /* Adjust button size */
     }
 }
 
-/* Style pour le conteneur global du carousel */
+/* Styles for the global container of the carousel */
 .carousel {
     position: relative;
     display: flex;
-    flex-direction: column; /* Les éléments sont empilés verticalement */
-    align-items: center; /* Centrer les éléments horizontalement */
+    flex-direction: column; /* Elements are stacked vertically */
+    align-items: center; /* Center elements horizontally */
 }
 
+/* Styles for carousel items */
 .carousel-item {
     position: relative;
     display: none;
 }
 
-/* Style pour les images à l'intérieur du carousel */
+/* Styles for images inside the carousel */
 .carousel-item img {
-    width: 70%; /* Ajuster la largeur de l'image à 70% de la largeur de la fenêtre */
-    height: auto; /* Hauteur automatique pour maintenir le ratio d'aspect */
+    width: 70%; /* Adjust image width to 70% of window width */
+    height: auto; /* Automatic height to maintain aspect ratio */
     max-height: 70vh;
-    display: block; /* Permettre de centrer l'image horizontalement */
-    margin: 0 auto; /* Centrer l'image horizontalement */
+    display: block; /* Allow centering the image horizontally */
+    margin: 0 auto; /* Center the image horizontally */
     padding-bottom: 0.2em;
 }
 
-
-/* Style pour les contrôles de navigation */
+/* Styles for navigation controls */
 .carousel-controls {
     display: flex;
-    justify-content: center; /* Centrer les boutons horizontalement */
+    justify-content: center; 
 }
 
+/* Styles for previous and next controls */
 .carousel-control-prev,
 .carousel-control-next {
     display: block;
@@ -160,15 +167,17 @@ li a:hover {
     border-radius: 5px;
     width: 100px;
     height: 30px;
-    margin: 0 10px; /* Ajouter un espacement entre les boutons */
-    cursor: pointer; /* Curseur pointer pour indiquer l'interactivité */
+    margin: 0 10px; 
+    cursor: pointer; 
 }
 
+/* Hover styles for previous and next controls */
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
     opacity: 0.9;
 }
 
+/* Styles for the contact section */
 .contact-section {
     margin-left: 20em;
     margin-right: 20em;
@@ -178,6 +187,7 @@ li a:hover {
     border: solid 1px #0077b5;
 }
 
+/* Styles for active contact section */
 .contact-active {
     background-color: #8b4513;
     color: white;
