@@ -6,12 +6,9 @@ setMiddleLine();
 
 const elements = document.querySelectorAll('section');
 
-elements.forEach(element =>
-{
-    console.log(element);
-    window.addEventListener('scroll', function() {
-        showActiveDiv(element, 'contact-active');
-    });
+
+window.addEventListener('scroll', function() {
+    showActiveDiv(elements, 'contact-active');
 });
 
 

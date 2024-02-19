@@ -1,19 +1,7 @@
 <?php
 use App\Views\Part\SetNav;
 
-use Core\ManageConnection;
-
-//check if a account is connected
-if (ManageConnection::is_connected())
-{
-    //set the nav with the profile page
-    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Profil", "/connexion/profil") . SetNav::set_navToken("Galerie", "/galerie");
-}
-else
-{
-    //set the nav with the connection page
-    $html = SetNav::set_navToken("Accueil", "/") . SetNav::set_navToken("Contact", BASE_URL . '/contact') . SetNav::set_navToken("Connexion", "/connexion") . SetNav::set_navToken("Galerie", "/galerie");
-}
+$nav = SetNav::set_navi();
 
 ?>
 
@@ -29,7 +17,7 @@ else
     <header>
         <nav>
             <ul>
-                <?=$html?>
+                <?=$nav?>
             </ul>
         </nav>
     </header>
