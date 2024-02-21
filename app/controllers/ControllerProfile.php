@@ -44,12 +44,14 @@ class ControllerProfile
         if (!ManageForm::is_validCSRFAndFrequency())
         {
             //disconect user and show a 404 error
+            ModelUser::unset_cookieToStayConnected($_SESSION['id']);
             ManageConnection::disconect_user();
             DisplayView::show_error404();
         }
         else
         {
             //disconect user and redirect to the login page
+            ModelUser::unset_cookieToStayConnected($_SESSION['id']);
             ManageConnection::disconect_user();
             header('Location: ' . BASE_URL . '/' . 'connexion');
         }

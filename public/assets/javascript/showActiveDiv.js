@@ -8,7 +8,7 @@ function showActiveDiv(elements, classCss)
     let laneRect = midLane.getBoundingClientRect();
 
     // Iterate through the elements array to check each element's position
-    elements.array.forEach(element => {
+    Array.from(elements).forEach(element => {
         // Get the bounding rectangle of the current element
         let elementRect = element.getBoundingClientRect();
 

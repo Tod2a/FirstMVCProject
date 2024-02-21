@@ -73,6 +73,12 @@ class ControllerConnection
                         {
                             //redirect to profile if activated
                             $_SESSION['activated'] = true;
+                            //check if the user want to stay connected
+                            if(isset($_POST['connexion_checkbox']) && $_POST['connexion_checkbox'] === 'stayconnected')
+                            {
+                                //set the connection token for the user
+                                ModelUser::set_cookieToStayConnected($user);
+                            }
                             header('Location: ' . BASE_URL . '/' . 'connexion' . '/' . 'profil');
                         }
                         else

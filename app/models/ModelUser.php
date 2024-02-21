@@ -1,7 +1,10 @@
 <?php
 namespace App\Models;
 
-use Core\ManageDb;
+use Core\{
+    ManageDb,
+    ManageConnection
+};
 
 use \PDO;
 
@@ -9,6 +12,7 @@ class ModelUser
 {
     // Define the table name for user data
     private const TABLE = "t_utilisateur_uti";
+    private const TABLE_ID = "uti_id";
 
     public static function get_table()
     {
@@ -282,6 +286,33 @@ class ModelUser
             //return the failed message
             return "erreur d'activation";
         }
+    }
+
+    //function to store the connection token into the database
+    private static function set_tokenIntoDb(int $id, string $token, string $table = self::TABLE, string $utiId = self::TABLE_ID)
+    {
+        $tableToken = 'uti_token';
+        $pdo = ManageDb::connect_db();
+        $requete = "UPDATE $table SET $tableToken = :token WHERE $utiId = $id";
+        $stmt = $pdo->prepare($requete);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+    }
+
+    //function to setup the cookie and the database with the same token
+    public static function set_cookieToStayConnected(array $user): void
+    {
+        $token = ManageConnection::set_tokenToStayConnected($user['uti_pseudo'], self::TABLE, 'uti_token');
+        ModelUser::set_tokenIntoDb($user['uti_id'], $token);
+        $expiration = time() + 14 * 24 * 3600;
+        setcookie('tokenconnection', $token, $expiration);
+    }
+
+    public static function unset_cookieToStayConnected(int $id)
+    {
+        $token = "";
+        ModelUser::set_tokenIntoDb($id, $token);
+        setcookie('tokenconnection', $token, time() - 3600);
     }
 }
 

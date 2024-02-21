@@ -42,7 +42,15 @@ class ManageDb
         $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         //return the array with the user values
-        return $user[0];
+        if(!empty($user))
+        {
+            return $user[0];
+        }
+        else
+        {
+            return 'error';
+        }
+        
     }
 
 }

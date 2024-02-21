@@ -1,9 +1,9 @@
 <?php
 
-$nomDuServeur = 'localhost';
-$nomUtilisateur = 'root';
-$motDePasse = '';
-$nomBDD = "bdd_projet_web";
+$serverName = 'localhost';
+$username = 'root';
+$password = '';
+$dbName = "bdd_projet_web";
 /*
 Script used to drop the table
 */

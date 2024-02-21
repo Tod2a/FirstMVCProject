@@ -1,8 +1,8 @@
 <?php
-$nomDuServeur = 'localhost';
-$nomUtilisateur = 'root';
-$motDePasse = '';
-$nomBDD = "bdd_projet_web";
+$serverName = 'localhost';
+$username = 'root';
+$password = '';
+$dbName = "bdd_projet_web";
 
 // Script used to create the table
 // Try to establish a connection to the database:
@@ -23,7 +23,8 @@ try
             uti_motdepasse char(60) NOT NULL,
             uti_role ENUM('utilisateur', 'administrateur') NOT NULL DEFAULT 'utilisateur',
             uti_compte_active BOOLEAN NOT NULL DEFAULT 0,
-            uti_code_activation char(5)
+            uti_code_activation char(5),
+            uti_token char(60)
         )
     ";
 

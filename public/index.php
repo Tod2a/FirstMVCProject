@@ -9,8 +9,19 @@ Autoloader::init();
 // Start the session
 session_start();
 
-// Import the router.
-use Core\Router;
+// Import the router and the ManageConnection to check the cookies.
+use Core\{
+    Router,
+    ManageConnection
+};
+
+//check if the cookie is set and setup the connection
+if ($userId = ManageConnection::check_connectionTokenIsSet('t_utilisateur_uti')) {
+    if (!isset($_SESSION['id'])) {
+        $_SESSION['id'] = $userId;
+        $_SESSION['activated'] = true;
+    }
+}
 
 // Environment state: 'dev' in development mode or 'prod' in production mode.
 // This allows using conditions to perform certain actions only if in a specific mode.

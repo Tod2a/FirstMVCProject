@@ -12,6 +12,9 @@
 <input type="text" id="connexion_motDePasse" name="connexion_motDePasse" maxlength="72" minlength="8" <?=$args['access']['connexion_motDePasse'] ?? ""?> required><br>
 <div id="connexion_motDePasse-error" class="error"><?=$args['errors']['connexion_motDePasse'] ?? ''; ?></div><br>
 
+<input type="checkbox" id="connexion_checkbox" name="connexion_checkbox" value="stayconnected">
+<label for="rester_connect">Voulez-vous rester connecté</label><br><br>
+
 <input type="submit" value="Se connecter">
 <?= $args['finalMessage'] ?? ""?>
 <form>
